@@ -2,7 +2,8 @@
 Swift for Arm64/aarch64 SBC's - Rock64, RaspberryPi3 and many more
 
 Install package now available for arm64/aarch64 compatible SBC's.
-Tested on the Rock64 from pine64.org
+
+Tested on the Rock64 from http://pine64.org
 
 Add repo -
 
