@@ -106,12 +106,13 @@ public struct Triple {
 
     public static let macOS = try! Triple("x86_64-apple-macosx10.10")
     public static let linux = try! Triple("x86_64-unknown-linux")
+    public static let arm64linux = try! Triple("aarch64-unknown-linux")
     public static let android = try! Triple("armv7-unknown-linux-androideabi")
 
   #if os(macOS)
     public static let hostTriple: Triple = .macOS
   #elseif os(Linux) && arch(arm64)
-    public static let hostTriple: Triple = try! Triple("aarch64-unknown-linux")
+    public static let hostTriple: Triple = .arm64linux
   #elseif os(Linux) && arch(s390x)
     public static let hostTriple: Triple = try! Triple("s390x-unknown-linux")
   #else
