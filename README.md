@@ -24,3 +24,18 @@ Install Swift -
 ### RaspberyPi 3 64bit OS
 
 A 64 bit Debian 10 "Buster" preview with Swift 4.1.1 pre-installed is available for testing.
+
+Note: This is a lite server image for headless operation.
+
+https://github.com/futurejones/swift-arm64/releases/download/rpi3-debian-buster-64bit/debian_10_64bit_rpi3.img.tar.gz
+
+- Download and copy image to sd card.
+- boot and `ssh pi@rpi3.local`
+- username "pi"
+- password "raspberry"
+
+Test with some server side swift examples from Kitura
+- `git clone https://github.com/IBM-Swift/Kitura-Sample.git`
+- `cd Kitura-Sample`
+- `swift build`
+- `swift run Kitura-Sample`
