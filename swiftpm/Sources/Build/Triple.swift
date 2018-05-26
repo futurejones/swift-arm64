@@ -33,6 +33,7 @@ public struct Triple {
     public enum Arch: String {
         case x86_64
         case armv7
+        case aarch64
         case s390x
     }
 
@@ -109,6 +110,8 @@ public struct Triple {
 
   #if os(macOS)
     public static let hostTriple: Triple = .macOS
+  #elseif os(Linux) && arch(arm64)
+    public static let hostTriple: Triple = try! Triple("aarch64-unknown-linux")
   #elseif os(Linux) && arch(s390x)
     public static let hostTriple: Triple = try! Triple("s390x-unknown-linux")
   #else
