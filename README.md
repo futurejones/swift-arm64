@@ -29,7 +29,8 @@ Note: This is a lite server image for headless operation.
 
 https://github.com/futurejones/swift-arm64/releases/download/rpi3-debian-buster-64bit/debian_10_64bit_rpi3.img.tar.gz
 
-- Download and copy image to sd card.
+- Download and untar
+- copy "bionic_rpi3.img" image to sd card
 - boot and `ssh pi@rpi3.local`
 - username "pi"
 - password "raspberry"
