@@ -1,4 +1,4 @@
-# swift-arm64
+# Swift-Arm64
 Swift for Arm64/aarch64 SBC's - Rock64, RaspberryPi3 and many more
 
 Install package now available for arm64/aarch64 compatible SBC's.
