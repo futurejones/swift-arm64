@@ -891,6 +891,8 @@ def main():
     # Compute the build paths.
     if platform.system() == 'Darwin':
         build_target = "x86_64-apple-macosx10.10"
+    elif platform.system() == 'Linux' and platform.processor() == 'aarch64':
+        build_target = "aarch64-unknown-linux"
     elif platform.processor() == 's390x':
         build_target = "s390x-unknown-linux"
     else:
