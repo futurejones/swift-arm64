@@ -9,11 +9,15 @@ Tested on the Rock64 from http://pine64.org
 
 Add repo -
 
-```curl -s https://packagecloud.io/install/repositories/swift-arm/debian/script.deb.sh | sudo bash```
+```bash
+$ curl -s https://packagecloud.io/install/repositories/swift-arm/debian/script.deb.sh | sudo bash
+```
 
 Install Swift - 
 
-```sudo apt-get install swift4```
+```bash
+$ sudo apt-get install swift4
+```
 
 ### Tested Boards and OS's
 
@@ -35,7 +39,10 @@ https://github.com/futurejones/swift-arm64/releases/download/rpi3-debian-buster-
 - password "raspberry"
 
 Test with some server side swift examples from Kitura
-- `git clone https://github.com/IBM-Swift/Kitura-Sample.git`
-- `cd Kitura-Sample`
-- `swift build`
-- `swift run Kitura-Sample`
+```bash
+$ git clone https://github.com/IBM-Swift/Kitura-Sample.git
+$ cd Kitura-Sample
+$ swift build
+$ swift run Kitura-Sample
+```
+
