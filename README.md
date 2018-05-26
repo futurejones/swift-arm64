@@ -21,8 +21,8 @@ $ sudo apt-get install swift4
 
 ### Tested Boards and OS's
 
-###### Rock64 - Debian/Stretch Unbutu/Xenial  
-###### RaspberryPi 3 - Debian 10 64bit preview
+*Rock64* - Debian/Stretch Unbutu/Xenial  
+*RaspberryPi 3* - Debian 10 64bit preview
 
 ### RaspberyPi 3 64bit OS
 
