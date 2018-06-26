@@ -9,7 +9,7 @@ index 46e499b..fed8b0a 100644
 -  case MappedCTypeKind::VaList:
 -    if (ClangTypeSize != ClangCtx.getTypeSize(ClangCtx.VoidPtrTy))
 -      return std::make_pair(Type(), "");
-+  case MappedCTypeKind::VaList:    
++  case MappedCTypeKind::VaList:
 +    if (ClangTypeSize != ClangCtx.getTypeSize(ClangCtx.VoidPtrTy)) {
 +      if (ClangCtx.getTargetInfo().getBuiltinVaListKind() !=
 +          clang::TargetInfo::AArch64ABIBuiltinVaList)
@@ -74,7 +74,7 @@ index 52e9f21..0013b83 100644
 +
 +// ARM Procedure Call Standard for aarch64. (IHI0055B)
 +// The va_list type may refer to any parameter in a parameter list may be in one
-+// of three memory locations depending on its type and position in the argument 
++// of three memory locations depending on its type and position in the argument
 +// list :
 +// 1. GP register save area x0 - x7
 +// 2. 128-bit FP/SIMD register save area q0 - q7
