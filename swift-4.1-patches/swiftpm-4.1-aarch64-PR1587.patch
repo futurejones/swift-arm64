@@ -43,7 +43,7 @@ index 1ce1556..4a9d2e5 100644
 +    #elseif arch(arm64)
 +      public static let hostTriple: Triple = .arm64Linux
 +    #elseif arch(arm)
-+      public static let hostTriple: Triple = .armLinux    
++      public static let hostTriple: Triple = .armLinux
 +    #endif
    #endif
  }
@@ -57,7 +57,7 @@ index 784a232..6ae5e98 100755
          build_target = "x86_64-apple-macosx10.10"
 -    elif platform.processor() == 's390x':
 -        build_target = "s390x-unknown-linux"
-+    elif platform.system() == 'Linux':              
++    elif platform.system() == 'Linux':
 +        if platform.machine() == 'x86_64':
 +            build_target = "x86_64-unknown-linux"
 +        elif platform.machine() == 's390x':
