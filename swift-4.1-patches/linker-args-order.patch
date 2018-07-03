@@ -1,8 +1,8 @@
 diff --git a/test/Driver/linker-args-order-linux.swift b/test/Driver/linker-args-order-linux.swift
-index 5999bfe..935c8f8 100644
+index 5999bfe..4239690 100644
 --- a/test/Driver/linker-args-order-linux.swift
 +++ b/test/Driver/linker-args-order-linux.swift
-@@ -4,6 +4,6 @@
+@@ -4,6 +4,5 @@
  print("hello world!")
  // RUN: %empty-directory(%t)
  // RUN: %target-swiftc_driver -driver-print-jobs -static-stdlib -o %t/static-stdlib %s -Xlinker --no-allow-multiple-definition 2>&1| %FileCheck %s
