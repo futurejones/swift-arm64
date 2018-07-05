@@ -33,7 +33,7 @@ index 4891558..6494ec0 100644
 +   set(LIBFUZZER_TEST_RUNTIME_OBJECTS
 +     $<TARGET_OBJECTS:RTfuzzer.${arch}>)
 + endif()
-+ 
++
 + add_library(${LIBFUZZER_TEST_RUNTIME} STATIC
 +   ${LIBFUZZER_TEST_RUNTIME_OBJECTS})
 + set_target_properties(${LIBFUZZER_TEST_RUNTIME} PROPERTIES
