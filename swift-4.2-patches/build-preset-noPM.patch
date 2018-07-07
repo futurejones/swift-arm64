@@ -1,5 +1,5 @@
 diff --git a/utils/build-presets.ini b/utils/build-presets.ini
-index a5f3605..9635335 100644
+index a5f3605..fb5da48 100644
 --- a/utils/build-presets.ini
 +++ b/utils/build-presets.ini
 @@ -713,7 +713,7 @@ swift-enable-ast-verifier=0
@@ -20,6 +20,15 @@ index a5f3605..9635335 100644
  install-xctest
  install-prefix=/usr
  swift-install-components=autolink-driver;compiler;clang-builtin-headers;stdlib;swift-remote-mirror;sdk-overlay;license;sourcekit-inproc
+@@ -732,7 +732,7 @@ build-swift-stdlib-unittest-extra
+ # Executes the lit tests for the installable package that is created
+ # Assumes the swift-integration-tests repo is checked out
+ 
+-test-installable-package
++#test-installable-package
+ 
+ # Path to the root of the installation filesystem.
+ install-destdir=%(install_destdir)s
 @@ -774,7 +774,7 @@ skip-test-cmark
  skip-test-lldb
  skip-test-swift
