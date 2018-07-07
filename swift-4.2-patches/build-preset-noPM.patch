@@ -1,0 +1,31 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index a5f3605..9635335 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -713,7 +713,7 @@ swift-enable-ast-verifier=0
+ mixin-preset=mixin_lightweight_assertions
+ 
+ llbuild
+-swiftpm
++#swiftpm
+ xctest
+ dash-dash
+ 
+@@ -721,7 +721,7 @@ build-ninja
+ install-swift
+ install-lldb
+ install-llbuild
+-install-swiftpm
++#install-swiftpm
+ install-xctest
+ install-prefix=/usr
+ swift-install-components=autolink-driver;compiler;clang-builtin-headers;stdlib;swift-remote-mirror;sdk-overlay;license;sourcekit-inproc
+@@ -774,7 +774,7 @@ skip-test-cmark
+ skip-test-lldb
+ skip-test-swift
+ skip-test-llbuild
+-skip-test-swiftpm
++#skip-test-swiftpm
+ skip-test-xctest
+ skip-test-foundation
+ skip-test-libdispatch
