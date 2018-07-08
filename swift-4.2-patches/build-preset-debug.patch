@@ -1,0 +1,14 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index a5f3605..6f6b27e 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -744,7 +744,8 @@ installable-package=%(installable_package)s
+ mixin-preset=mixin_linux_installation
+ build-subdir=buildbot_linux
+ lldb
+-release
++#release
++debug
+ test
+ validation-test
+ long-test
