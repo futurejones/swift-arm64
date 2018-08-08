@@ -1,3 +1,21 @@
+diff --git a/lib/ClangImporter/ImportDecl.cpp b/lib/ClangImporter/ImportDecl.cpp
+index e9612b2..52e49fc 100644
+--- a/lib/ClangImporter/ImportDecl.cpp
++++ b/lib/ClangImporter/ImportDecl.cpp
+@@ -330,8 +330,11 @@ getSwiftStdlibType(const clang::TypedefNameDecl *D,
+     break;
+ 
+   case MappedCTypeKind::VaList:
+-    if (ClangTypeSize != ClangCtx.getTypeSize(ClangCtx.VoidPtrTy))
+-      return std::make_pair(Type(), "");
++   if (ClangTypeSize != ClangCtx.getTypeSize(ClangCtx.VoidPtrTy)) {
++      if (ClangCtx.getTargetInfo().getBuiltinVaListKind() !=
++          clang::TargetInfo::AArch64ABIBuiltinVaList)
++        return std::make_pair(Type(), "");
++    }
+     break;
+ 
+   case MappedCTypeKind::ObjCBool:
 diff --git a/stdlib/public/core/CTypes.swift b/stdlib/public/core/CTypes.swift
 index 8931a7c..a605c0a 100644
 --- a/stdlib/public/core/CTypes.swift
@@ -42,7 +60,7 @@ index 8931a7c..a605c0a 100644
  internal func _memcpy(
    dest destination: UnsafeMutableRawPointer,
 diff --git a/stdlib/public/core/VarArgs.swift b/stdlib/public/core/VarArgs.swift
-index a143713..28cf5fa 100644
+index a143713..cbde49c 100644
 --- a/stdlib/public/core/VarArgs.swift
 +++ b/stdlib/public/core/VarArgs.swift
 @@ -90,6 +90,23 @@ internal let _registerSaveWords = _countGPRegisters + _countSSERegisters * _sseR
@@ -69,7 +87,7 @@ index a143713..28cf5fa 100644
  #endif
  
  #if arch(s390x)
-@@ -480,6 +497,137 @@ final internal class _VaListBuilder {
+@@ -480,6 +497,130 @@ final internal class _VaListBuilder {
    internal var storage: ContiguousArray<Int>
  }
  
@@ -78,7 +96,6 @@ index a143713..28cf5fa 100644
 +@_fixed_layout // FIXME(sil-serialize-all)
 +@usableFromInline // FIXME(sil-serialize-all)
 +final internal class _VaListBuilder {
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal init() {
 +    // Prepare the register save area.
@@ -88,7 +105,6 @@ index a143713..28cf5fa 100644
 +    count = allocated
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  deinit {
 +    if let allocatedStorage = storage {
@@ -96,7 +112,6 @@ index a143713..28cf5fa 100644
 +    }
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func append(_ arg: CVarArg) {
 +    var encoded = arg._cVarArgEncoding
@@ -121,7 +136,6 @@ index a143713..28cf5fa 100644
 +    }
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func va_list() -> CVaListPointer {
 +    let vr_top = storage + (_fpRegisterWords * _countFPRegisters)
@@ -131,7 +145,6 @@ index a143713..28cf5fa 100644
 +                          __vr_top: vr_top, __gr_off: -64, __vr_off: -128)
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func appendWords(_ words: [Int]) {
 +    let newCount = count + words.count
@@ -157,7 +170,6 @@ index a143713..28cf5fa 100644
 +    }
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func rawSizeAndAlignment(
 +    _ wordCount: Int
@@ -166,7 +178,6 @@ index a143713..28cf5fa 100644
 +      requiredAlignmentInBytes._builtinWordValue)
 +  }
 +
-+  //@inlinable // FIXME(sil-serialize-all)
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func allocStorage(wordCount: Int) -> UnsafeMutablePointer<Int> {
 +    let (rawSize, rawAlignment) = rawSizeAndAlignment(wordCount)
