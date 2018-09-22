@@ -2,7 +2,7 @@ diff --git a/lib/ClangImporter/ImportDecl.cpp b/lib/ClangImporter/ImportDecl.cpp
 index e9612b2..52e49fc 100644
 --- a/lib/ClangImporter/ImportDecl.cpp
 +++ b/lib/ClangImporter/ImportDecl.cpp
-@@ -330,8 +330,11 @@ getSwiftStdlibType(const clang::TypedefNameDecl *D,
+@@ -323,8 +323,11 @@ getSwiftStdlibType(const clang::TypedefNameDecl *D,
      break;
  
    case MappedCTypeKind::VaList:
