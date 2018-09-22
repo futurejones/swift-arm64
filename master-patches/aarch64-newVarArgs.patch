@@ -27,14 +27,14 @@ index 8931a7c..a605c0a 100644
 +#if arch(arm64) && os(Linux)
 +@_fixed_layout
 +public struct CVaListPointer {
-+  @usableFromInline // FIXME(sil-serialize-all)
++  @usableFromInline // unsafe-performance
 +  internal var value: (__stack: UnsafeMutablePointer<Int>?,
 +                       __gr_top: UnsafeMutablePointer<Int>?,
 +                       __vr_top: UnsafeMutablePointer<Int>?,
 +                       __gr_off: Int32,
 +                       __vr_off: Int32)
 +
-+  @inlinable // FIXME(sil-serialize-all)
++  @inlinable // unsafe-performance
 +  public // @testable
 +  init(__stack: UnsafeMutablePointer<Int>?,
 +       __gr_top: UnsafeMutablePointer<Int>?,
@@ -49,7 +49,7 @@ index 8931a7c..a605c0a 100644
 +
  @_fixed_layout
  public struct CVaListPointer {
-   @usableFromInline // FIXME(sil-serialize-all)
+   @usableFromInline // unsafe-performance
 @@ -233,6 +256,8 @@ extension CVaListPointer : CustomDebugStringConvertible {
    }
  }
