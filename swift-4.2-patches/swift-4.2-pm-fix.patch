@@ -1,26 +1,3 @@
-From 2d04b8491b31f379738fca6129c42a294d230510 Mon Sep 17 00:00:00 2001
-From: Saleem Abdulrasool <compnerd@compnerd.org>
-Date: Fri, 21 Sep 2018 11:20:09 -0700
-Subject: [PATCH] stdlib: check for ARM/ARM64 more thoroughly (NFC)
-
-Update the instances of checks for architectures to be more broad for different
-spellings of the architecture macro.  Certain targets use `_M_ARM` and others
-use `__arm__`.  Similarly, arm64/aarch64 has `_M_ARM64`, `__arm64__` and
-`__aarch64__` as spellings.  This just mechanically goes through and encodes the
-various spellings.
-
-Take the opportunity to replace some raw checks with `defined` checks which
-avoids a pedantic warning due to the undefined macro when performing the check
-as the preprocessor may warn about an undefined condition evaluating to `0`.
----
- include/swift/Runtime/Atomic.h        | 2 +-
- stdlib/public/SwiftShims/HeapObject.h | 6 +++---
- stdlib/public/runtime/HeapObject.cpp  | 2 +-
- stdlib/public/runtime/SwiftObject.mm  | 2 +-
- stdlib/public/runtime/WeakReference.h | 8 ++++----
- stdlib/public/stubs/MathStubs.cpp     | 2 +-
- 6 files changed, 11 insertions(+), 11 deletions(-)
-
 diff --git a/include/swift/Runtime/Atomic.h b/include/swift/Runtime/Atomic.h
 index 3f9c1a3edf5b..655078a7d6af 100644
 --- a/include/swift/Runtime/Atomic.h
