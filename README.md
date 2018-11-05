@@ -1,3 +1,5 @@
+[![Build Status](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/5/badge/icon)](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/5/)
+
 # Swift-Arm64
 Swift for Arm64/aarch64 SBC's - Rock64, RaspberryPi3 and many more
 
