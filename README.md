@@ -3,7 +3,8 @@ The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.
 
 ### Swift 4.1.3 &nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-4.1-branch-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-4.1-branch-aarch64)   
 ### Swift 4.2.1 &nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/5/badge/icon)](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE)
-### Swift 5.0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.0-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.0-aarch64)
+### Swift 5.0 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.0-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.0-aarch64)
+### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.0-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64)
 
 # Swift-Arm64
 Swift for Arm64/aarch64 SBC's - Rock64, RaspberryPi3 and many more
