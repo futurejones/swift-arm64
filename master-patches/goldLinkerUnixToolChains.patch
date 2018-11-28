@@ -1,0 +1,12 @@
+diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
+index 5d7711e..3158151 100644
+--- a/lib/Driver/UnixToolChains.cpp
++++ b/lib/Driver/UnixToolChains.cpp
+@@ -103,6 +103,7 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
+ std::string toolchains::GenericUnix::getDefaultLinker() const {
+   switch (getTriple().getArch()) {
+   case llvm::Triple::arm:
++  case llvm::Triple::aarch64:
+   case llvm::Triple::armeb:
+   case llvm::Triple::thumb:
+   case llvm::Triple::thumbeb:
