@@ -113,7 +113,7 @@ index 5d42c58..dc0bf72 100644
 +@_fixed_layout // c-abi
 +@usableFromInline // c-abi
 +final internal class _VaListBuilder {
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal init() {
 +    // Prepare the register save area.
@@ -123,7 +123,7 @@ index 5d42c58..dc0bf72 100644
 +    count = allocated
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  deinit {
 +    if let allocatedStorage = storage {
@@ -131,7 +131,7 @@ index 5d42c58..dc0bf72 100644
 +    }
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal func append(_ arg: CVarArg) {
 +    var encoded = arg._cVarArgEncoding
@@ -156,7 +156,7 @@ index 5d42c58..dc0bf72 100644
 +    }
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal func va_list() -> CVaListPointer {
 +    let vr_top = storage + (_fpRegisterWords * _countFPRegisters)
@@ -166,7 +166,7 @@ index 5d42c58..dc0bf72 100644
 +                          __vr_top: vr_top, __gr_off: -64, __vr_off: -128)
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal func appendWords(_ words: [Int]) {
 +    let newCount = count + words.count
@@ -192,7 +192,7 @@ index 5d42c58..dc0bf72 100644
 +    }
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal func rawSizeAndAlignment(
 +    _ wordCount: Int
@@ -201,7 +201,7 @@ index 5d42c58..dc0bf72 100644
 +      requiredAlignmentInBytes._builtinWordValue)
 +  }
 +
-+  @inlineable // c-abi
++  @inlinable // c-abi
 +  @usableFromInline // c-abi
 +  internal func allocStorage(wordCount: Int) -> UnsafeMutablePointer<Int> {
 +    let (rawSize, rawAlignment) = rawSizeAndAlignment(wordCount)
