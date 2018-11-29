@@ -60,7 +60,7 @@ index b46fa89..bdbe228 100644
  internal func _memcpy(
    dest destination: UnsafeMutableRawPointer,
 diff --git a/stdlib/public/core/VarArgs.swift b/stdlib/public/core/VarArgs.swift
-index 5d42c58..f7146cf 100644
+index 5d42c58..859d987 100644
 --- a/stdlib/public/core/VarArgs.swift
 +++ b/stdlib/public/core/VarArgs.swift
 @@ -90,6 +90,23 @@ internal let _registerSaveWords = _countGPRegisters + _countFPRegisters * _fpReg
@@ -87,33 +87,16 @@ index 5d42c58..f7146cf 100644
  #endif
  
  #if arch(s390x)
-@@ -387,14 +404,14 @@ extension Double : _CVarArgPassedAsDouble, _CVarArgAligned {
- extension Float80 : CVarArg, _CVarArgAligned {
-   /// Transform `self` into a series of machine words that can be
-   /// appropriately interpreted by C varargs.
--  @inlinable // FIXME(sil-serialize-all)
-+  @inlinable // c-abi
-   public var _cVarArgEncoding: [Int] {
-     return _encodeBitsAsWords(self)
-   }
-   
-   /// Returns the required alignment in bytes of
-   /// the value returned by `_cVarArgEncoding`.
--  @inlinable // FIXME(sil-serialize-all)
-+  @inlinable // c-abi
-   public var _cVarArgAlignment: Int {
-     // FIXME: alignof differs from the ABI alignment on some architectures
-     return MemoryLayout.alignment(ofValue: self)
 @@ -498,6 +515,129 @@ final internal class _VaListBuilder {
                 Builtin.addressof(&self.header)))
    }
  }
 +#elseif arch(arm64) && os(Linux)
 +
-+@_fixed_layout // c-abi
-+@usableFromInline // c-abi
++@_fixed_layout // FIXME(sil-serialize-all)
++@usableFromInline // FIXME(sil-serialize-all)
 +final internal class _VaListBuilder {
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal init() {
 +    // Prepare the register save area.
 +    allocated = _registerSaveWords
@@ -122,14 +105,14 @@ index 5d42c58..f7146cf 100644
 +    count = allocated
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  deinit {
 +    if let allocatedStorage = storage {
 +      deallocStorage(wordCount: allocated, storage: allocatedStorage)
 +    }
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func append(_ arg: CVarArg) {
 +    var encoded = arg._cVarArgEncoding
 +
@@ -153,7 +136,7 @@ index 5d42c58..f7146cf 100644
 +    }
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func va_list() -> CVaListPointer {
 +    let vr_top = storage + (_fpRegisterWords * _countFPRegisters)
 +    let gr_top = vr_top + _countGPRegisters
@@ -162,7 +145,7 @@ index 5d42c58..f7146cf 100644
 +                          __vr_top: vr_top, __gr_off: -64, __vr_off: -128)
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func appendWords(_ words: [Int]) {
 +    let newCount = count + words.count
 +    if newCount > allocated {
@@ -187,7 +170,7 @@ index 5d42c58..f7146cf 100644
 +    }
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func rawSizeAndAlignment(
 +    _ wordCount: Int
 +  ) -> (Builtin.Word, Builtin.Word) {
@@ -195,14 +178,14 @@ index 5d42c58..f7146cf 100644
 +      requiredAlignmentInBytes._builtinWordValue)
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func allocStorage(wordCount: Int) -> UnsafeMutablePointer<Int> {
 +    let (rawSize, rawAlignment) = rawSizeAndAlignment(wordCount)
 +    let rawStorage = Builtin.allocRaw(rawSize, rawAlignment)
 +    return UnsafeMutablePointer<Int>(rawStorage)
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal func deallocStorage(
 +    wordCount: Int, storage: UnsafeMutablePointer<Int>
 +  ) {
@@ -210,25 +193,25 @@ index 5d42c58..f7146cf 100644
 +    Builtin.deallocRaw(storage._rawValue, rawSize, rawAlignment)
 +  }
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal let requiredAlignmentInBytes = MemoryLayout<Double>.alignment
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var count = 0
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var allocated = 0
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var storage: UnsafeMutablePointer<Int>!
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var gpRegistersUsed = 0
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var fpRegistersUsed = 0
 +
-+  @usableFromInline // c-abi
++  @usableFromInline // FIXME(sil-serialize-all)
 +  internal var overflowWordsUsed = 0
 +}
  
