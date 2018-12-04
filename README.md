@@ -35,23 +35,11 @@ $ sudo apt-get install swift4
 
 ### RaspberyPi 3 64bit OS
 
-A 64 bit Debian 10 "Buster" preview with Swift 4.1.1 pre-installed is available for testing.
+An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Raspberry Pi 3.
 
 Note: This is a lite server image for headless operation.
 
-https://github.com/futurejones/swift-arm64/releases/download/rpi3-debian-buster-64bit/debian_10_64bit_rpi3.img.tar.gz
+Download image here - http://cdimage.ubuntu.com/releases/18.04/beta/
 
-- Download and untar
-- copy "bionic_rpi3.img" image to sd card
-- boot and `ssh pi@rpi3.local`
-- username "pi"
-- password "raspberry"
-
-Test with some server side swift examples from Kitura
-```bash
-$ git clone https://github.com/IBM-Swift/Kitura-Sample.git
-$ cd Kitura-Sample
-$ swift build
-$ swift run Kitura-Sample
-```
+Swift 4.2 AArch64 for Ubuntu 18.04 is available here - https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb
 
