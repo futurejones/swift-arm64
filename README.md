@@ -13,7 +13,7 @@ Install package now available for arm64/aarch64 compatible SBC's.
 
 for Debian/Stretch
 
-Tested on the Rock64 from http://pine64.org
+Tested on the Rock64 from [http://pine64.org](http://pine64.org)
 
 Add repo -
 
