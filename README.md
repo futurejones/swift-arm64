@@ -37,7 +37,9 @@ $ sudo apt-get install swift4
 
 An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Raspberry Pi 3.
 
-Note: This is a lite server image for headless operation.
+*Note: This is a lite server image for headless operation.*  
+*Tested on RPi3B and RPi3B+.*  
+*Should also install on RPi3A+ and maybe the Compute Module 3.*
 
 Download image here - [http://cdimage.ubuntu.com/releases/18.04/beta/](http://cdimage.ubuntu.com/releases/18.04/beta/)
 
