@@ -39,7 +39,7 @@ An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Rasp
 
 Note: This is a lite server image for headless operation.
 
-Download image here - http://cdimage.ubuntu.com/releases/18.04/beta/
+Download image here - [http://cdimage.ubuntu.com/releases/18.04/beta/](http://cdimage.ubuntu.com/releases/18.04/beta/)
 
-Swift 4.2 AArch64 for Ubuntu 18.04 is available here - https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb
+Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb)
 
