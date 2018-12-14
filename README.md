@@ -45,3 +45,56 @@ Download image here - [http://cdimage.ubuntu.com/releases/18.04/beta/](http://cd
 
 Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb)
 
+## Building Swift
+
+*Swift development on AArch64 systems is currently possible on Ubuntu 16.04 and 18.04.*  
+*The following build instructions are for Ubuntu 16.04.*
+
+### Setting up the Swift development environment
+* If possible start with a new clean install of Ubuntu 16.04 and then update and upgrade your system:  
+```$ sudo apt-get update```  
+```$ sudo apt-get upgrade```
+* Install development dependencies:  
+```$ sudo apt-get install git cmake ninja-build clang python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev systemtap-sdt-dev tzdata rsync```  
+
+### Getting Sources for Swift and Related Projects
+* First create a directory for all of the Swift sources:  
+```mkdir swift-source```  
+```cd swift-source```
+
+* Next clone the Swift repository:  
+```$ git clone https://github.com/apple/swift.git```
+
+* Next use the "update-checkout" utility to clone the related repositories. When using this utility we can use either a --tag to specify a release or --scheme to specify a branch. If no tag or scheme is used then the master will be used as default.  
+The following command will clone and checkout all necessary repositories to build a 4.2.1 release.  
+```$ ./swift/utils/update-checkout --clone --tag swift-4.2.1-RELEASE```  
+The following command will clone and checkout all necessary repositories to build the swift-5.0-branch.  
+```$ ./swift/utils/update-checkout --clone --scheme swift-5.0-branch```
+
+### Applying Patches
+* Some branches require additional patches for successful builds.  
+  * swift-4.2-branch:  
+  ```$ cd swift```  
+  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swift-4.2-patches/swift-4.2-aarch64-VarArgs.patch```  
+  ```$ git apply swift-4.2-aarch64-VarArgs.patch```  
+  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swift-4.2-patches/swift-4.2-pm-fix.patch```  
+  ```$ git apply swift-4.2-pm-fix.patch```  
+  ```$ cd -```
+  
+  * swift-5.0-branch:  
+  ```$ cd swift```  
+  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/master-patches/aarch64-new-master-VarArgs.patch```  
+  ```$ git apply aarch64-new-master-VarArgs.patch```  
+  ```$ cd -```
+
+  * master:  
+  No patches required.
+
+### Building with Ninja
+* The ```build-script``` is a high-level build automation script that supports basic options such as building a Swift-compatible LLDB, building the Swift Package Manager, building for various platforms, running tests after builds, and more.  
+We will be using ```buildbot_linux``` presets to specify OS, install directories and package names.  
+*NOTE: Replace [USER] with your user name. You should also rename "swift-4.2.1-aarch64-RELEASE-Ubuntu-16.04.tar.gz" tarball to match your build if needed*  
+```$ ./swift/utils/build-script --preset=buildbot_linux,no_test install_destdir=/home/[USER]/swift-source/install installable_package=/home/[USER]/swift-source/install/swift-4.2.1-aarch64-RELEASE-Ubuntu-16.04.tar.gz -n```  
+Using the "-n" tag on the end of the command enables a "dry run" to check the commands are correct before running the actual build.  
+If everything is correct then you can remove "-n" and proceed with the build.  
+Depending on your build system the build can take from 1.5hrs to 15hrs or more.  
