@@ -65,7 +65,7 @@ Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](ht
 * Next clone the Swift repository:  
 ```$ git clone https://github.com/apple/swift.git```
 
-* Next use the "update-checkout" utility to clone the related repositories. When using this utility we can use either a --tag to specify a release or --scheme to specify a branch. If no tag or scheme is used then the master will be used as default.  
+* Next use the "update-checkout" utility to clone the related repositories. When using this utility we can use either a `--tag` to specify a release or `--scheme` to specify a branch. If no tag or scheme is used then the master will be used as default.  
 The following command will clone and checkout all necessary repositories to build a 4.2.1 release.  
 ```$ ./swift/utils/update-checkout --clone --tag swift-4.2.1-RELEASE```  
 The following command will clone and checkout all necessary repositories to build the swift-5.0-branch.  
