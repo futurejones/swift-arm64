@@ -119,7 +119,7 @@ index 2de5a21536d..0e31463c1a3 100644
  #endif
  
 -#if arch(x86_64) || arch(s390x)
-+#if arch(x86_64) || arch(s390x) || (arch(arm64) && !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(Windows)))
++#if arch(x86_64) || arch(s390x) || (arch(arm64) && !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(Windows))
  
  /// An object that can manage the lifetime of storage backing a
  /// `CVaListPointer`.
