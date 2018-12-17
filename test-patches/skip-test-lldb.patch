@@ -1,0 +1,14 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index 512664e..bedf2fe 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -762,7 +762,8 @@ lit-args=-v
+ dash-dash
+ 
+ # rdar://problem/31454823
+-lldb-test-swift-only
++# lldb-test-swift-only - changed in https://github.com/apple/swift/pull/17681
++skip-test-lldb
+ 
+ install-foundation
+ install-libdispatch
