@@ -35,7 +35,6 @@ index efb58c19245..9dd1e52fc50 100644
 +      case clang::TargetInfo::CharPtrBuiltinVaList:
 +      case clang::TargetInfo::VoidPtrBuiltinVaList:
 +      case clang::TargetInfo::PowerABIBuiltinVaList:
-+      case clang::TargetInfo::X86_64ABIBuiltinVaList:
 +      case clang::TargetInfo::AAPCSABIBuiltinVaList:
 +        assert(ClangCtx.getTypeSize(ClangCtx.VoidPtrTy) == ClangTypeSize &&
 +               "expected va_list type to be sizeof(void *)");
@@ -44,6 +43,7 @@ index efb58c19245..9dd1e52fc50 100644
 +        break;
 +      case clang::TargetInfo::PNaClABIBuiltinVaList:
 +      case clang::TargetInfo::SystemZBuiltinVaList:
++      case clang::TargetInfo::X86_64ABIBuiltinVaList:
          return std::make_pair(Type(), "");
      }
      break;
