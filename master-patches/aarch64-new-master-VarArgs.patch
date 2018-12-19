@@ -95,7 +95,7 @@ index 5d42c58..859d987 100644
 +
 +@_fixed_layout // FIXME(sil-serialize-all)
 +@usableFromInline // FIXME(sil-serialize-all)
-+final internal class _VaListBuilder {
++final internal class __VaListBuilder {
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal init() {
 +    // Prepare the register save area.
