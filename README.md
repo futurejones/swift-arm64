@@ -19,7 +19,12 @@ Add repo -
 
 ```bash
 $ curl -s https://packagecloud.io/install/repositories/swift-arm/debian/script.deb.sh | sudo bash
-```
+```  
+For new Ubuntu 18.04 64bit Paspberry Pi 3 models use this repo -  
+
+```bash
+$ curl -s https://packagecloud.io/install/repositories/swift-arm/release/script.deb.sh | sudo bash
+``` 
 
 Install Swift - 
 
