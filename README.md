@@ -50,6 +50,10 @@ Download image here - [http://cdimage.ubuntu.com/releases/18.04/beta/](http://cd
 
 Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb)
 
+## Swift 5.0 Developer Snapshots
+Swift 5.0 developer snapshots are now available for Ubuntu 16.04.  
+Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases)
+
 ## Building Swift
 
 *Swift development on AArch64 systems is currently possible on Ubuntu 16.04 and 18.04.*  
