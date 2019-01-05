@@ -1,3 +1,4 @@
+# Swift for Arm64/AArch64 Servers and SBC's
 ## Latest build info from our CI server
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)
 
@@ -31,7 +32,9 @@ Install Swift -
 ```bash
 $ sudo apt-get install swift4
 ```
-
+### Tested Servers
+*c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
+*Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
 *Rock64* - Debian/Stretch Ubuntu/Xenial  
