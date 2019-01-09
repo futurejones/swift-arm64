@@ -1,0 +1,28 @@
+AArch64 defines long double as 128 bits floats.
+Swift doesn't support that size, so Clang Importer doesn't import the
+function at all.
+
+Disable the function usage in the tests to avoid an error while
+compiling the test file.
+---
+ test/ClangImporter/cfuncs_parse.swift | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/ClangImporter/cfuncs_parse.swift b/test/ClangImporter/cfuncs_parse.swift
+index e5e2cb1d4bd..d7264c112fc 100644
+--- a/test/ClangImporter/cfuncs_parse.swift
++++ b/test/ClangImporter/cfuncs_parse.swift
+@@ -57,9 +57,13 @@ func test_pow() {
+   pow(1.5, 2.5)
+ }
+ 
++#if !arch(arm64)
++// long doubles in AArch64 are 128 bits, which is not supported by
++// Swift, so don't test this.
+ func test_powl() {
+   powl(1.5, 2.5)
+ }
++#endif
+ 
+ func test_puts(_ s: String) {
+   _ = s.withCString { puts($0) + 32 };
