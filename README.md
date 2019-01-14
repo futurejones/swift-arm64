@@ -30,7 +30,7 @@ $ sudo apt-get install swift4
 *Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
-*Rock64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org) 
+*Rock64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org)  
 *RaspberryPi 3 models* - Ubuntu 18.04 64bit  
 *ODROID-C2* - Ubuntu 16.04.4 LTS xenial
 
