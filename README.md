@@ -50,6 +50,9 @@ Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](ht
 Swift 5.0 developer snapshots are now available for Ubuntu 16.04.  
 Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases)
 
+## Swift for TensorFlow
+[Build instructions](https://github.com/futurejones/swift-arm64/blob/master/swift-for-tensorflow-patches/BUILD.md#build-instructions-for-swift-for-tensorflow-on-ubuntu-1604)
+
 ## Building Swift
 
 *Swift development on AArch64 systems is currently possible on Ubuntu 16.04 and 18.04.*  
