@@ -49,8 +49,9 @@ git apply fix-aws-s3.patch
 cd -
 ```
 
-Build Swift for TensorFlow  
+Build Swift for TensorFlow 
+NOTE: Replace [USER] with your user name.
 ```
-./swift/utils/build-script --preset=buildbot_linux_1604_tensorflow install_destdir=/home/worksonarm_test/jenkins_slave/workspace/swift-tensorflow/install installable_package=/home/worksonarm_test/jenkins_slave/workspace/swift-tensorflow/install/swift-tensorflow-aarch64.tar.gz
+./swift/utils/build-script --preset=buildbot_linux_1604_tensorflow install_destdir=/home/[USER]/swift-source/install installable_package=/home/[USER]/swift-source/install/swift-tensorflow-aarch64.tar.gz
 ```
 #### Pre-built binary available here [swift-for-tensorflow-dev-2019-01-14](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev-2019-01-14)
