@@ -95,10 +95,10 @@ index 5d42c58..859d987 100644
 +
 +// NOTE: older runtimes called this _VaListBuilder. The two must
 +// coexist, so it was renamed. The old name must not be used in the new
-+// runtime.
++// runtime. NOTE: NOT IN SWIFT FOR TENSORFLOW YET
 +@_fixed_layout // FIXME(sil-serialize-all)
 +@usableFromInline // FIXME(sil-serialize-all)
-+final internal class __VaListBuilder {
++final internal class _VaListBuilder {
 +  @usableFromInline // FIXME(sil-serialize-all)
 +  internal init() {
 +    // Prepare the register save area.
