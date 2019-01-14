@@ -8,13 +8,11 @@ The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-master-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64)
 
 # Swift-Arm64
-Swift for Arm64/aarch64 SBC's - Rock64, RaspberryPi3 and many more
+Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
 
-Install package now available for arm64/aarch64 compatible SBC's.
+Install packages are now available for arm64/aarch64 compatible Servers and SBC's.
 
-for Debian/Stretch
-
-Tested on the Rock64 from [http://pine64.org](http://pine64.org)
+for Ubuntu/Debian/Stretch
 
 Add repo -
 
@@ -32,7 +30,7 @@ $ sudo apt-get install swift4
 *Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
-*Rock64* - Debian/Stretch Ubuntu/Xenial  
+*Rock64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org) 
 *RaspberryPi 3 models* - Ubuntu 18.04 64bit  
 *ODROID-C2* - Ubuntu 16.04.4 LTS xenial
 
