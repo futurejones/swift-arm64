@@ -1,0 +1,934 @@
+From 8abbce32d9d05d6f442b2102388f25e2c0bb3312 Mon Sep 17 00:00:00 2001
+From: Jake Petroules <jake.petroules@apple.com>
+Date: Mon, 10 Sep 2018 23:01:35 -0700
+Subject: [PATCH] Let the Triple struct determine the host triple automatically
+
+...instead of hardcoding a bunch of triples and selecting what is in
+most cases only a guess/approximation.
+
+This also more closely models the fields of a target triple based on how
+LLVM looks at it.
+---
+ Sources/Build/BuildPlan.swift                 |  32 +-
+ Sources/Build/Triple.swift                    | 364 ++++++++++++++----
+ Sources/Workspace/Destination.swift           |  72 ++--
+ Tests/BuildTests/BuildPlanTests.swift         |  56 +--
+ .../FunctionalTests/MiscellaneousTests.swift  |   2 +-
+ Utilities/Docker/docker-utils                 |   2 +-
+ Utilities/bootstrap                           |  38 +-
+ 7 files changed, 413 insertions(+), 153 deletions(-)
+
+diff --git a/Sources/Build/BuildPlan.swift b/Sources/Build/BuildPlan.swift
+index bfee84338..d22942bfa 100644
+--- a/Sources/Build/BuildPlan.swift
++++ b/Sources/Build/BuildPlan.swift
+@@ -201,11 +201,11 @@ public struct BuildParameters {
+     fileprivate func targetTripleArgs(for target: ResolvedTarget) -> [String] {
+         var args = ["-target"]
+         // Compute the triple string for Darwin platform using the platform version.
+-        if triple.isDarwin() {
++        if triple.isDarwin {
+             guard let macOSSupportedPlatform = target.underlyingTarget.getSupportedPlatform(for: .macOS) else {
+                 fatalError("the target \(target) doesn't support building for macOS")
+             }
+-            args += [triple.tripleString(forPlatformVersion: macOSSupportedPlatform.version.versionString)]
++            args += [triple.withOSVersion(try! Triple.Version(macOSSupportedPlatform.version.versionString)).tripleString]
+         } else {
+             args += [triple.tripleString]
+         }
+@@ -214,7 +214,7 @@ public struct BuildParameters {
+ 
+     /// The current platform we're building for.
+     var currentPlatform: PackageModel.Platform {
+-        if self.triple.isDarwin() {
++        if self.triple.isDarwin {
+             return .macOS
+         } else {
+             return .linux
+@@ -313,7 +313,7 @@ public final class ClangTargetBuildDescription {
+     public func basicArguments() -> [String] {
+         var args = [String]()
+         // Only enable ARC on macOS.
+-        if buildParameters.triple.isDarwin() {
++        if buildParameters.triple.isDarwin {
+             args += ["-fobjc-arc"]
+         }
+         args += buildParameters.targetTripleArgs(for: target)
+@@ -328,17 +328,17 @@ public final class ClangTargetBuildDescription {
+         // index store for Apple's clang or if explicitly asked to. 
+         if Process.env.keys.contains("SWIFTPM_ENABLE_CLANG_INDEX_STORE") {
+             args += buildParameters.indexStoreArguments
+-        } else if buildParameters.triple.isDarwin(), (try? buildParameters.toolchain._isClangCompilerVendorApple()) == true {
++        } else if buildParameters.triple.isDarwin, (try? buildParameters.toolchain._isClangCompilerVendorApple()) == true {
+             args += buildParameters.indexStoreArguments
+         }
+ 
+-        if !buildParameters.triple.isWindows() {
++        if !buildParameters.triple.isWindows {
+             // Using modules currently conflicts with the Windows SDKs.
+             args += ["-fmodules", "-fmodule-name=" + target.c99name]
+         }
+         args += ["-I", clangTarget.includeDir.asString]
+         args += additionalFlags
+-        if !buildParameters.triple.isWindows() {
++        if !buildParameters.triple.isWindows {
+             args += moduleCacheArgs
+         }
+         args += buildParameters.sanitizers.compileCFlags()
+@@ -388,7 +388,7 @@ public final class ClangTargetBuildDescription {
+     private var optimizationArguments: [String] {
+         switch buildParameters.configuration {
+         case .debug:
+-            if buildParameters.triple.isWindows() {
++            if buildParameters.triple.isWindows {
+                 return ["-g", "-gcodeview", "-O0"]
+             } else {
+                 return ["-g", "-O0"]
+@@ -608,7 +608,7 @@ public final class ProductBuildDescription {
+ 
+         switch product.type {
+         case .executable:
+-            if buildParameters.triple.isWindows() {
++            if buildParameters.triple.isWindows {
+                 return RelativePath("\(name).exe")
+             } else {
+                 return RelativePath(name)
+@@ -621,8 +621,10 @@ public final class ProductBuildDescription {
+             fatalError()
+         case .test:
+             let base = "\(name).xctest"
+-            if buildParameters.triple.isDarwin() {
++            if buildParameters.triple.os == .macOS {
+                 return RelativePath("\(base)/Contents/MacOS/\(name)")
++            } else if buildParameters.triple.isDarwin {
++                return RelativePath("\(base)/\(name)")
+             } else {
+                 return RelativePath(base)
+             }
+@@ -679,7 +681,7 @@ public final class ProductBuildDescription {
+         args += additionalFlags
+ 
+         if buildParameters.configuration == .debug {
+-            if buildParameters.triple.isWindows() {
++            if buildParameters.triple.isWindows {
+                 args += ["-Xlinker","-debug"]
+             } else {
+                 args += ["-g"]
+@@ -703,7 +705,7 @@ public final class ProductBuildDescription {
+             return []
+         case .test:
+             // Test products are bundle on macOS, executable on linux.
+-            if buildParameters.triple.isDarwin() {
++            if buildParameters.triple.isDarwin {
+                 args += ["-Xlinker", "-bundle"]
+             } else {
+                 args += ["-emit-executable"]
+@@ -723,7 +725,7 @@ public final class ProductBuildDescription {
+         
+         // On linux, set rpath such that dynamic libraries are looked up
+         // adjacent to the product. This happens by default on macOS.
+-        if buildParameters.triple.isLinux() {
++        if buildParameters.triple.isLinux {
+             args += ["-Xlinker", "-rpath=$ORIGIN"]
+         }
+         args += ["@" + linkFileListPath.asString]
+@@ -858,7 +860,7 @@ public class BuildPlan {
+             throw Error.noBuildableTarget
+         }
+ 
+-        if buildParameters.triple.isLinux() {
++        if buildParameters.triple.isLinux {
+             // FIXME: Create a target for LinuxMain file on linux.
+             // This will go away once it is possible to auto detect tests.
+             let testProducts = graph.allProducts.filter({ $0.type == .test })
+@@ -1002,7 +1004,7 @@ public class BuildPlan {
+             }
+         }
+ 
+-        if buildParameters.triple.isLinux() {
++        if buildParameters.triple.isLinux {
+             if product.type == .test {
+                 product.linuxMainTarget.map({ staticTargets.append($0) })
+             }
+diff --git a/Sources/Build/Triple.swift b/Sources/Build/Triple.swift
+index fa3e6d625..08791a0e5 100644
+--- a/Sources/Build/Triple.swift
++++ b/Sources/Build/Triple.swift
+@@ -22,132 +22,362 @@ public struct Triple {
+     public let arch: Arch
+     public let vendor: Vendor
+     public let os: OS
++    public let osVersion: Version?
+     public let abi: ABI
+ 
++    private let tripleStringHasABI: Bool
++
+     public enum Error: Swift.Error {
+         case badFormat
+-        case unknownArch
+         case unknownOS
+     }
+ 
+     public enum Arch: String {
++        case unknown
++
++        case arm
++        case arm64
++        case arm64_32
++        case i386
+         case x86_64
+-        case i686
++        case powerpc64
+         case powerpc64le
+         case s390x
+-        case aarch64
++
++        // TODO: Split out into a separate SubArch enum?
+         case armv7
+-        case arm
++        case armv7k
++        case armv7s
+     }
+ 
+     public enum Vendor: String {
+         case unknown
++
++        /// Indicates Apple Inc., the vendor of iOS, macOS, tvOS, and watchOS.
+         case apple
++
++        /// Indicates the legacy, vendor-neutral "PC" vendor.
++        case pc
++
++        /// Indicates Sony Computer Entertainment, Inc., the vendor of PS4 OS.
++        case scei
+     }
+ 
+-    public enum OS: String {
+-        case darwin
++    public enum OS: String, CaseIterable {
++        case unknown
++
++        case Darwin = "darwin"
++        case FreeBSD = "freebsd"
++        case Haiku = "haiku"
++        case iOS = "ios"
++        case Linux = "linux"
+         case macOS = "macosx"
+-        case linux
+-        case windows
++        case PS4 = "ps4"
++        case tvOS = "tvos"
++        case watchOS = "watchos"
++        case Windows = "windows"
++
++        fileprivate static let allKnown: [OS] = OS.allCases.filter { $0 != .unknown }
++    }
++
++    public struct Version {
++        let major: Int
++        let minor: Int
++        let patch: Int
++
++        public init(major: UInt) {
++            self.major = Int(major)
++            self.minor = -1
++            self.patch = -1
++        }
++
++        public init(major: UInt, minor: UInt) {
++            self.major = Int(major)
++            self.minor = Int(minor)
++            self.patch = -1
++        }
++
++        public init(major: UInt, minor: UInt, patch: UInt) {
++            self.major = Int(major)
++            self.minor = Int(minor)
++            self.patch = Int(patch)
++        }
++
++        public init(_ string: String) throws {
++            let rawComponents = string.split(separator: ".").map(String.init)
++            let components = try rawComponents.map { s -> Int in
++                guard let i = UInt.init(s) else { throw Error.badFormat }
++                return Int(i)
++            }
++            self.major = components.count > 0 ? components[0] : 0
++            self.minor = components.count > 1 ? components[1] : -1
++            self.patch = components.count > 2 ? components[2] : -1
++        }
+ 
+-        fileprivate static let allKnown:[OS] = [
+-            .darwin,
+-            .macOS,
+-            .linux,
+-            .windows
+-        ]
++        public var stringValue: String {
++            return [major, minor, patch].compactMap { $0 >= 0 ? String($0) : nil }.joined(separator: ".")
++        }
+     }
+ 
++    /// The value for the target triple's ABI field.
+     public enum ABI: String {
+         case unknown
+-        case android = "androideabi"
++
++        /// The ABI used by the Android operating system for all architectures except 32-bit ARM.
++        case android
++
++        /// The ABI used by the Android operating system for the 32-bit ARM architecture.
++        case androideabi
++
++        /// The ABI used by Cygwin, a Unix-like environment for Windows.
++        case cygnus
++
++        /// The ABI used by GNU/Linux operating systems for most architectures except 32-bit ARM.
++        case gnu
++
++        /// The ABI used by GNU/Linux operating systems for the 32-bit ARM architecture, with software floating-point instructions.
++        case gnueabi
++
++        /// The ABI used by GNU/Linux operating systems for the 32-bit ARM architecture, with hardware floating-point instructions.
++        case gnueabihf
++
++        /// The ABI used by Microsoft Visual C/C++ on Windows.
++        case msvc
++
++        /// The ABI used for the simulator variants of Apple platforms.
++        case simulator
+     }
+ 
+-    public init(_ string: String) throws {
+-        let components = string.split(separator: "-").map(String.init)
++    /// Initializes a triple directly from raw components.
++    ///
++    /// You should generally use the `Triple.create` family of methods instead, unless you need something extremely specific.
++    public init(arch: Arch = .unknown, vendor: Vendor = .unknown, os: OS = .unknown, osVersion: Version? = nil, abi: ABI? = nil) {
++        self.tripleString = [arch.stringValue(for: vendor, os: os), vendor.rawValue, os.rawValue + (osVersion?.stringValue ?? ""), abi?.rawValue].compactMap({ $0 }).joined(separator: "-")
++        self.arch = arch
++        self.vendor = vendor
++        self.os = os
++        self.osVersion = osVersion
++        self.tripleStringHasABI = abi != nil
++        self.abi = abi ?? .unknown
++    }
+ 
+-        guard components.count == 3 || components.count == 4 else {
++    public init(_ string: String, strict: Bool = true) throws {
++        if !strict {
++            // TODO: Implement tolerant parsing where more fields can be optional
+             throw Error.badFormat
+         }
+ 
+-        guard let arch = Arch(rawValue: components[0]) else {
+-            throw Error.unknownArch
++        let components = string.split(separator: "-").map(String.init)
++
++        guard components.count == 3 || components.count == 4 else {
++            throw Error.badFormat
+         }
+ 
++        let arch = Arch(rawValue: components[0]) ?? .unknown
+         let vendor = Vendor(rawValue: components[1]) ?? .unknown
+ 
+-        guard let os = Triple.parseOS(components[2]) else {
++        guard let (os, osVersion) = try Triple.parseOS(components[2]) else {
+             throw Error.unknownOS
+         }
+ 
+-        let abiString = components.count > 3 ? components[3] : nil
++        self.tripleStringHasABI = components.count > 3
++
++        let abiString = tripleStringHasABI ? components[3] : nil
+         let abi = abiString.flatMap(ABI.init)
+ 
+         self.tripleString = string
+         self.arch = arch
+         self.vendor = vendor
+         self.os = os
++        self.osVersion = osVersion
+         self.abi = abi ?? .unknown
+     }
+ 
+-    fileprivate static func parseOS(_ string: String) -> OS? {
++    fileprivate static func parseOS(_ string: String) throws -> (OS, Version?)? {
++        // Exact match?
++        if let os = OS(rawValue: string) {
++            return (os, nil)
++        }
++
++        // Look for an OS name plus version number
+         for candidate in OS.allKnown {
+             if string.hasPrefix(candidate.rawValue) {
+-                return candidate
++                // Assume the rest of the string is a version number
++                return (candidate, try Version(String(string.dropFirst(candidate.rawValue.count))))
+             }
+         }
+ 
+         return nil
+     }
+ 
+-    public func isDarwin() -> Bool {
+-        return vendor == .apple || os == .macOS || os == .darwin
++    // TODO: The "current" triple is not necessarily the desired host triple,
++    // i.e. in cases of 32-bit code running on a 64-bit OS, or other sorts of
++    // emulation layers, but this is good enough for now in most cases.
++    public static let hostTriple = Triple.current
++}
++
++extension Triple {
++    /// Creates a triple with the given architecture, OS and OS version.
++    /// The vendor and ABI fields are determined automatically.
++    public static func create(arch: Arch, os: OS, osVersion: Version? = nil) -> Triple {
++        let vendor: Vendor = {
++            switch os {
++            case .Darwin, .iOS, .macOS, .tvOS, .watchOS:
++                return .apple
++            case .PS4:
++                return .scei
++            case .Haiku where arch == .i386:
++                return .pc
++            case .FreeBSD, .Haiku, .Linux, .Windows, .unknown:
++                return .unknown
++            }
++        }()
++        let abi: ABI? = {
++            if [.i386, .x86_64].contains(arch) && [.iOS, .tvOS, .watchOS].contains(os) {
++                return .simulator
++            }
++            if os == .Linux {
++                return arch.isArm32 ? .gnueabi : .gnu
++            }
++            if os == .Windows {
++                return .msvc
++            }
++            return nil
++        }()
++        return Triple(arch: arch, vendor: vendor, os: os, osVersion: osVersion, abi: abi)
+     }
+ 
+-    public func isLinux() -> Bool {
+-        return os == .linux
++    /// Creates an Android triple for the given architecture and OS version.
++    /// The ABI is determined automatically based on the architecture.
++    public static func createAndroid(arch: Arch, osVersion: Version? = nil) -> Triple {
++        return Triple(arch: arch, os: .Linux, osVersion: osVersion, abi: Arch.current.isArm32 ? .androideabi : .android)
+     }
+ 
+-    public func isWindows() -> Bool {
+-        return os == .windows
++    /// Creates a Cygwin triple for the given architecture and OS version.
++    /// The ABI is set to `cygnus`.
++    public static func createCygwin(arch: Arch, osVersion: Version? = nil) -> Triple {
++        return Triple(arch: arch, vendor: .unknown, os: .Windows, osVersion: osVersion, abi: .cygnus)
+     }
+ 
+-    /// Returns the triple string for the given platform version.
+-    ///
+-    /// This is currently meant for Apple platforms only.
+-    public func tripleString(forPlatformVersion version: String) -> String {
+-        precondition(isDarwin())
+-        return self.tripleString + version
+-    }
+-
+-    public static let macOS = try! Triple("x86_64-apple-macosx")
+-    public static let x86_64Linux = try! Triple("x86_64-unknown-linux")
+-    public static let i686Linux = try! Triple("i686-unknown-linux")
+-    public static let ppc64leLinux = try! Triple("powerpc64le-unknown-linux")
+-    public static let s390xLinux = try! Triple("s390x-unknown-linux")
+-    public static let arm64Linux = try! Triple("aarch64-unknown-linux")
+-    public static let armLinux = try! Triple("armv7-unknown-linux-gnueabihf")
+-    public static let android = try! Triple("armv7-unknown-linux-androideabi")
+-    public static let windows = try! Triple("x86_64-unknown-windows-msvc")
+-
+-  #if os(macOS)
+-    public static let hostTriple: Triple = .macOS
+-  #elseif os(Windows)
+-    public static let hostTriple: Triple = .windows
+-  #elseif os(Linux)
+-    #if arch(x86_64)
+-      public static let hostTriple: Triple = .x86_64Linux
+-    #elseif arch(i386)
+-      public static let hostTriple: Triple = .i686Linux
+-    #elseif arch(powerpc64le)
+-      public static let hostTriple: Triple = .ppc64leLinux
+-    #elseif arch(s390x)
+-      public static let hostTriple: Triple = .s390xLinux
+-    #elseif arch(arm64)
+-      public static let hostTriple: Triple = .arm64Linux
+-    #elseif arch(arm)
+-      public static let hostTriple: Triple = .armLinux    
+-    #endif
+-  #endif
++    /// Returns the "current" triple, that is,
++    /// the triple that the running code was compiled for.
++    public static var current: Triple {
++        if OS.isAndroid {
++            return createAndroid(arch: Arch.current)
++        }
++        if OS.isCygwin {
++            return createCygwin(arch: Arch.current)
++        }
++        return create(arch: Arch.current, os: OS.current)
++    }
++
++    public var isDarwin: Bool {
++        return os.isDarwin
++    }
++
++    public var isLinux: Bool {
++        return os == .Linux
++    }
++
++    public var isWindows: Bool {
++        return os == .Windows
++    }
++
++    /// Returns the triple with its OS version component replaced with the given version.
++    public func withOSVersion(_ osVersion: Version? = nil) -> Triple {
++        return Triple(arch: arch, vendor: vendor, os: os, osVersion: osVersion, abi: tripleStringHasABI ? abi : nil)
++    }
++}
++
++extension Triple.OS {
++    /// Returns the "current" OS, that is,
++    /// the OS that the running code was compiled for.
++    public static var current: Triple.OS {
++        // https://github.com/apple/swift/blob/master/lib/Basic/LangOptions.cpp
++        #if os(macOS)
++        return .macOS
++        #elseif os(tvOS)
++        return .tvOS
++        #elseif os(watchOS)
++        return .watchOS
++        #elseif os(iOS)
++        return .iOS
++        #elseif os(Linux) || os(Android)
++        return .Linux // for Android, that's indicated in the environment field
++        #elseif os(FreeBSD)
++        return .FreeBSD
++        #elseif os(Windows) || os(Cygwin)
++        return .Windows // for Cygwin, that's indicated in the environment field
++        #elseif os(PS4)
++        return .PS4
++        #elseif os(Haiku)
++        return .Haiku
++        #else
++        return .unknown
++        #endif
++    }
++
++    fileprivate static var isAndroid: Bool {
++        #if os(Android)
++        return true
++        #else
++        return false
++        #endif
++    }
++
++    fileprivate static var isCygwin: Bool {
++        #if os(Cygwin)
++        return true
++        #else
++        return false
++        #endif
++    }
++
++    /// Returns whether the current OS is Darwin or is based on Darwin.
++    public var isDarwin: Bool {
++        return [.Darwin, .iOS, .macOS, .tvOS, .watchOS].contains(self)
++    }
++}
++
++extension Triple.Arch {
++    /// Returns the "current" architecture, that is,
++    /// the architecture that the running code was compiled for.
++    public static var current: Triple.Arch {
++        // https://github.com/apple/swift/blob/master/lib/Basic/LangOptions.cpp
++        #if arch(arm)
++        return .arm // We can't know the ARM subarch
++        #elseif arch(arm64)
++        return .arm64
++        #elseif arch(arm64_32)
++        return .arm64_32
++        #elseif arch(i386)
++        return .i386
++        #elseif arch(x86_64)
++        return .x86_64
++        #elseif arch(powerpc64)
++        return .powerpc64
++        #elseif arch(powerpc64le)
++        return .powerpc64le
++        #elseif arch(s390x)
++        return .s390x
++        #else
++        return .unknown
++        #endif
++    }
++
++    public var isArm32: Bool {
++        return [.arm, .armv7, .armv7k, .armv7s].contains(self)
++    }
++
++    /// Returns the string representation of the architecture,
++    /// which can vary by vendor and OS.
++    public func stringValue(for vendor: Triple.Vendor, os: Triple.OS) -> String {
++        if self == .arm64 && vendor != .apple {
++            return "aarch64"
++        }
++        if self == .i386 && os == .Haiku {
++            return "i586"
++        }
++        return rawValue
++    }
+ }
+diff --git a/Sources/Workspace/Destination.swift b/Sources/Workspace/Destination.swift
+index 8eefad944..0e0fc757f 100644
+--- a/Sources/Workspace/Destination.swift
++++ b/Sources/Workspace/Destination.swift
+@@ -72,7 +72,7 @@ public struct Destination {
+         // FIXME: We may want to allow overriding this using an env variable but that
+         // doesn't seem urgent or extremely useful as of now.
+         return AbsolutePath(#file).parentDirectory
+-            .parentDirectory.parentDirectory.appending(components: ".build", hostTargetTriple, "debug")
++            .parentDirectory.parentDirectory.appending(components: ".build", hostTargetTriple.tripleString, "debug")
+       #else
+         guard let cwd = originalWorkingDirectory else {
+             return try! AbsolutePath(validating: CommandLine.arguments[0]).parentDirectory
+@@ -91,12 +91,13 @@ public struct Destination {
+         let binDir = binDir ?? Destination.hostBinDir(
+             originalWorkingDirectory: originalWorkingDirectory)
+ 
+-      #if os(macOS)
+-        // Get the SDK.
+         let sdkPath: AbsolutePath
++
++        // Get the SDK.
+         if let value = lookupExecutablePath(filename: getenv("SYSROOT")) {
+             sdkPath = value
+         } else {
++            #if os(macOS)
+             // No value in env, so search for it.
+             let sdkPathStr = try Process.checkNonZeroExit(
+                 arguments: ["xcrun", "--sdk", "macosx", "--show-sdk-path"], environment: environment).spm_chomp()
+@@ -104,32 +105,25 @@ public struct Destination {
+                 throw DestinationError.invalidInstallation("default SDK not found")
+             }
+             sdkPath = AbsolutePath(sdkPathStr)
++            #else
++            sdkPath = .root
++            #endif
+         }
+ 
+         // Compute common arguments for clang and swift.
+-        // This is currently just frameworks path.
+-        let commonArgs = Destination.sdkPlatformFrameworkPath(environment: environment).map({ ["-F", $0.asString] }) ?? []
++        // This is currently just frameworks path on Apple platforms.
++        let commonArgs = hostTargetTriple.isDarwin ? (Destination.sdkPlatformFrameworkPath(environment: environment).map({ ["-F", $0.asString] }) ?? []) : []
++        let ccArgs = hostTargetTriple.isLinux ? ["-fPIC"] : []
+ 
+         return Destination(
+-            target: hostTargetTriple,
++            target: hostTargetTriple.tripleString,
+             sdk: sdkPath,
+             binDir: binDir,
+-            dynamicLibraryExtension: "dylib",
+-            extraCCFlags: commonArgs,
++            dynamicLibraryExtension: hostTargetTriple.dynamicLibraryExtension,
++            extraCCFlags: commonArgs + ccArgs,
+             extraSwiftCFlags: commonArgs,
+-            extraCPPFlags: ["-lc++"]
+-        )
+-      #else
+-        return Destination(
+-            target: hostTargetTriple,
+-            sdk: .root,
+-            binDir: binDir,
+-            dynamicLibraryExtension: "so",
+-            extraCCFlags: ["-fPIC"],
+-            extraSwiftCFlags: [],
+-            extraCPPFlags: ["-lstdc++"]
++            extraCPPFlags: hostTargetTriple.defaultCxxRuntimeLibrary.flatMap { ["-l\($0)"] } ?? []
+         )
+-      #endif
+     }
+ 
+     /// Returns macosx sdk platform framework path.
+@@ -150,15 +144,35 @@ public struct Destination {
+     private static var _sdkPlatformFrameworkPath: AbsolutePath? = nil
+ 
+     /// Target triple for the host system.
+-    private static let hostTargetTriple = Triple.hostTriple.tripleString
+-
+-  #if os(macOS)
+-    /// Returns the host's dynamic library extension.
+-    public static let hostDynamicLibraryExtension = "dylib"
+-  #else
+-    /// Returns the host's dynamic library extension.
+-    public static let hostDynamicLibraryExtension = "so"
+-  #endif
++    private static let hostTargetTriple = Triple.hostTriple
++}
++
++extension Triple {
++    public var dynamicLibraryExtension: String {
++        switch os {
++        case .Darwin, .iOS, .macOS, .tvOS, .watchOS:
++            return "dylib"
++        case .FreeBSD, .Linux, .Haiku, .PS4:
++            return "so"
++        case .Windows:
++            return "dll"
++        case .unknown:
++            fatalError("dynamicLibraryExtension not implemented for \(os)")
++        }
++    }
++
++    public var defaultCxxRuntimeLibrary: String? {
++        switch os {
++        case .Darwin, .iOS, .macOS, .tvOS, .watchOS, .FreeBSD, .PS4:
++            return "c++" // LLVM libc++
++        case .Linux, .Haiku:
++            return "stdc++" // GNU libstdc++
++        case .Windows:
++            return nil // Built-in with MSVC
++        case .unknown:
++            fatalError("defaultCxxRuntimeLibrary not implemented for \(os)")
++        }
++    }
+ }
+ 
+ extension Destination {
+diff --git a/Tests/BuildTests/BuildPlanTests.swift b/Tests/BuildTests/BuildPlanTests.swift
+index 44f2b5969..a66d65d29 100644
+--- a/Tests/BuildTests/BuildPlanTests.swift
++++ b/Tests/BuildTests/BuildPlanTests.swift
+@@ -271,12 +271,15 @@ final class BuildPlanTests: XCTestCase {
+         let ext = try result.target(for: "extlib").clangTarget()
+         var args: [String] = []
+ 
++        var osVersion: Triple.Version?
++
+       #if os(macOS)
+-        args += ["-fobjc-arc", "-target", "x86_64-apple-macosx10.10"]
+-      #else
+-        args += ["-target", "x86_64-unknown-linux"]
++        args += ["-fobjc-arc"]
++        osVersion = Triple.Version(major: 10, minor: 10)
+       #endif
+ 
++        args += ["-target", Triple.hostTriple.withOSVersion(osVersion).tripleString]
++
+         args += ["-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1"]
+         args += ["-fblocks", "-fmodules", "-fmodule-name=extlib",
+             "-I", "/ExtPkg/Sources/extlib/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"]
+@@ -288,11 +291,12 @@ final class BuildPlanTests: XCTestCase {
+         args = []
+ 
+       #if os(macOS)
+-        args += ["-fobjc-arc", "-target", "x86_64-apple-macosx10.10"]
+-      #else
+-        args += ["-target", "x86_64-unknown-linux"]
++        args += ["-fobjc-arc"]
++        osVersion = Triple.Version(major: 10, minor: 10)
+       #endif
+ 
++        args += ["-target", Triple.hostTriple.withOSVersion(osVersion).tripleString]
++
+         args += ["-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1"]
+         args += ["-fblocks", "-fmodules", "-fmodule-name=exe",
+             "-I", "/Pkg/Sources/exe/include", "-I", "/Pkg/Sources/lib/include", "-I", "/ExtPkg/Sources/extlib/include",
+@@ -410,12 +414,15 @@ final class BuildPlanTests: XCTestCase {
+         let lib = try result.target(for: "lib").clangTarget()
+         var args: [String] = []
+ 
++        var osVersion: Triple.Version?
++
+       #if os(macOS)
+-        args += ["-fobjc-arc", "-target", "x86_64-apple-macosx10.10"]
+-      #else
+-        args += ["-target", "x86_64-unknown-linux"]
++        args += ["-fobjc-arc"]
++        osVersion = Triple.Version(major: 10, minor: 10)
+       #endif
+ 
++        args += ["-target", Triple.hostTriple.withOSVersion(osVersion).tripleString]
++
+         args += ["-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1"]
+         args += ["-fblocks", "-fmodules", "-fmodule-name=lib", "-I", "/Pkg/Sources/lib/include",
+             "-fmodules-cache-path=/path/to/build/debug/ModuleCache"]
+@@ -828,20 +835,25 @@ final class BuildPlanTests: XCTestCase {
+         result.checkProductsCount(2)
+         result.checkTargetsCount(2)
+ 
++        var osVersion: Triple.Version?
++    #if os(macOS)
++        osVersion = Triple.Version(major: 10, minor: 10)
++    #endif
++
+         let exe = try result.target(for: "exe").clangTarget()
+     #if os(macOS)
+-        XCTAssertEqual(exe.basicArguments(), ["-fobjc-arc", "-target", "x86_64-apple-macosx10.10", "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=exe", "-I", "/Pkg/Sources/exe/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
++        XCTAssertEqual(exe.basicArguments(), ["-fobjc-arc", "-target", Triple.hostTriple.withOSVersion(osVersion).tripleString, "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=exe", "-I", "/Pkg/Sources/exe/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
+     #else
+-        XCTAssertEqual(exe.basicArguments(), ["-target", "x86_64-unknown-linux", "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=exe", "-I", "/Pkg/Sources/exe/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
++        XCTAssertEqual(exe.basicArguments(), ["-target", Triple.hostTriple.withOSVersion(osVersion).tripleString, "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=exe", "-I", "/Pkg/Sources/exe/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
+     #endif
+         XCTAssertEqual(exe.objects, [AbsolutePath("/path/to/build/debug/exe.build/main.c.o")])
+         XCTAssertEqual(exe.moduleMap, nil)
+ 
+         let lib = try result.target(for: "lib").clangTarget()
+     #if os(macOS)
+-        XCTAssertEqual(lib.basicArguments(), ["-fobjc-arc", "-target", "x86_64-apple-macosx10.10", "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=lib", "-I", "/Pkg/Sources/lib/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
++        XCTAssertEqual(lib.basicArguments(), ["-fobjc-arc", "-target", Triple.hostTriple.withOSVersion(osVersion).tripleString, "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=lib", "-I", "/Pkg/Sources/lib/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
+     #else
+-        XCTAssertEqual(lib.basicArguments(), ["-target", "x86_64-unknown-linux", "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=lib", "-I", "/Pkg/Sources/lib/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
++        XCTAssertEqual(lib.basicArguments(), ["-target", Triple.hostTriple.withOSVersion(osVersion).tripleString, "-g", "-O0", "-DSWIFT_PACKAGE=1", "-DDEBUG=1", "-fblocks",  "-fmodules", "-fmodule-name=lib", "-I", "/Pkg/Sources/lib/include", "-fmodules-cache-path=/path/to/build/debug/ModuleCache"])
+     #endif
+         XCTAssertEqual(lib.objects, [AbsolutePath("/path/to/build/debug/lib.build/lib.cpp.o")])
+         XCTAssertEqual(lib.moduleMap, AbsolutePath("/path/to/build/debug/lib.build/module.modulemap"))
+@@ -1035,7 +1047,7 @@ final class BuildPlanTests: XCTestCase {
+         )
+         XCTAssertNoDiagnostics(diagnostics)
+         
+-        let result = BuildPlanResult(plan: try BuildPlan(buildParameters: mockBuildParameters(destinationTriple: .windows), graph: graph, diagnostics: diagnostics, fileSystem: fs))
++        let result = BuildPlanResult(plan: try BuildPlan(buildParameters: mockBuildParameters(destinationTriple: Triple.create(arch: .x86_64, os: .Windows)), graph: graph, diagnostics: diagnostics, fileSystem: fs))
+         result.checkProductsCount(1)
+         result.checkTargetsCount(2)
+         
+@@ -1146,19 +1158,19 @@ final class BuildPlanTests: XCTestCase {
+             graph: graph, diagnostics: diagnostics,
+             fileSystem: fileSystem))
+ 
++        var osVersion: Triple.Version?
++
+         let aTarget = try result.target(for: "ATarget").swiftTarget().compileArguments()
+       #if os(macOS)
+-        XCTAssertMatch(aTarget, ["-target", "x86_64-apple-macosx10.13", .anySequence])
+-      #else
+-        XCTAssertMatch(aTarget, ["-target", "x86_64-unknown-linux", .anySequence])
++        osVersion = Triple.Version(major: 10, minor: 13)
+       #endif
++        XCTAssertMatch(aTarget, ["-target", .equal(Triple.hostTriple.withOSVersion(osVersion).tripleString), .anySequence])
+ 
+         let bTarget = try result.target(for: "BTarget").swiftTarget().compileArguments()
+       #if os(macOS)
+-        XCTAssertMatch(bTarget, ["-target", "x86_64-apple-macosx10.12", .anySequence])
+-      #else
+-        XCTAssertMatch(bTarget, ["-target", "x86_64-unknown-linux", .anySequence])
++        osVersion = Triple.Version(major: 10, minor: 12)
+       #endif
++        XCTAssertMatch(bTarget, ["-target", .equal(Triple.hostTriple.withOSVersion(osVersion).tripleString), .anySequence])
+     }
+ 
+     func testBuildSettings() throws {
+@@ -1257,7 +1269,7 @@ final class BuildPlanTests: XCTestCase {
+         }
+ 
+         do {
+-            let result = try createResult(for: .x86_64Linux)
++            let result = try createResult(for: Triple.create(arch: .x86_64, os: .Linux))
+ 
+             let dep = try result.target(for: "t1").swiftTarget().compileArguments()
+             XCTAssertMatch(dep, [.anySequence, "-DDEP", .end])
+@@ -1276,7 +1288,7 @@ final class BuildPlanTests: XCTestCase {
+         }
+ 
+         do {
+-            let result = try createResult(for: .macOS)
++            let result = try createResult(for: Triple.create(arch: .x86_64, os: .macOS))
+ 
+             let cbar = try result.target(for: "cbar").clangTarget().basicArguments()
+             XCTAssertMatch(cbar, [.anySequence, "-DCCC=2", "-I/A/Sources/cbar/Sources/headers", "-I/A/Sources/cbar/Sources/cppheaders", "-Icfoo", "-L", "cbar", "-Icxxfoo", "-L", "cxxbar", .end])
+diff --git a/Tests/FunctionalTests/MiscellaneousTests.swift b/Tests/FunctionalTests/MiscellaneousTests.swift
+index 2af4ca235..ad66a29a3 100644
+--- a/Tests/FunctionalTests/MiscellaneousTests.swift
++++ b/Tests/FunctionalTests/MiscellaneousTests.swift
+@@ -22,7 +22,7 @@ typealias ProcessID = Basic.Process.ProcessID
+ class MiscellaneousTestCase: XCTestCase {
+ 
+     private var dynamicLibraryExtension: String {
+-        return Destination.hostDynamicLibraryExtension
++        return Destination.host.dynamicLibraryExtension
+     }
+ 
+     func testPrintsSelectedDependencyVersion() {
+diff --git a/Utilities/Docker/docker-utils b/Utilities/Docker/docker-utils
+index e98a2fa19..5b1c80bd8 100755
+--- a/Utilities/Docker/docker-utils
++++ b/Utilities/Docker/docker-utils
+@@ -90,7 +90,7 @@ def bootstrap(args):
+ 
+ def build_run(args):
+     """Runs a built swift executable in the container."""
+-    docker_run([".build/x86_64-unknown-linux/debug/" + args.command] + args.arguments)
++    docker_run([".build/x86_64-unknown-linux-gnu/debug/" + args.command] + args.arguments)
+ 
+ def main():
+     """Main script entry-point."""
+diff --git a/Utilities/bootstrap b/Utilities/bootstrap
+index f75c168ff..61b704ef9 100755
+--- a/Utilities/bootstrap
++++ b/Utilities/bootstrap
+@@ -118,6 +118,20 @@ def get_current_sha(project_root):
+         return None
+ 
+ g_num_cpus = os.sysconf("SC_NPROCESSORS_ONLN")
++
++g_default_target = None
++if platform.system() == 'Darwin':
++    g_default_target = "x86_64-apple-macosx"
++elif platform.system() == 'Linux':
++    if platform.machine().startswith("armv"):
++        g_default_target = '%s-unknown-linux-gnueabi' % (platform.machine())
++    elif platform.machine() == 'i486' or platform.machine() == 'i586' or platform.machine() == 'i686':
++        g_default_target = 'i386-unknown-linux-gnu'
++    elif platform.machine() == 'ppc64le':
++        g_default_target = 'powerpc64le-unknown-linux-gnu'
++    else:
++        g_default_target = "%s-unknown-linux-gnu" % (platform.machine())
++
+ g_default_sysroot = None
+ if platform.system() == 'Darwin':
+     g_platform_path = subprocess.check_output(
+@@ -919,6 +933,9 @@ def main():
+                         help="path to the 'swift-build-tool' tool "
+                              "[%(default)s]",
+                         metavar="PATH")
++    parser.add_argument("--target",
++                        help="target triple to build for; defaults to an appropriate value based on your host [%(default)s]",
++                        default=g_default_target)
+     parser.add_argument("--sysroot",
+                         help="compiler sysroot to pass to Swift [%(default)s]",
+                         default=g_default_sysroot, metavar="PATH")
+@@ -1004,25 +1021,10 @@ def main():
+             raise SystemExit("unknown build action: %r" % (action,))
+ 
+     # Compute the build paths.
+-    if platform.system() == 'Darwin':
+-        build_target = "x86_64-apple-macosx"
+-    elif platform.system() == 'Linux':              
+-        if platform.machine() == 'x86_64':
+-            build_target = "x86_64-unknown-linux"
+-        elif platform.machine() == "i686":
+-            build_target = "i686-unknown-linux"
+-        elif platform.machine() == 's390x':
+-            build_target = "s390x-unknown-linux"
+-        elif platform.machine() == 'ppc64le':
+-            build_target = 'powerpc64le-unknown-linux'
+-        elif platform.machine().startswith("armv7"):
+-            build_target = 'armv7-unknown-linux-gnueabihf'
+-        elif platform.machine() == 'aarch64':
+-            build_target = 'aarch64-unknown-linux'
+-        else:
+-            raise SystemExit("ERROR: unsupported machine:",platform.machine())
++    if not args.target:
++        raise SystemExit("ERROR: no target detected and --target not specified")
+     else:
+-        raise SystemExit("ERROR: unsupported system:",platform.system())
++        build_target = args.target
+ 
+     build_path = os.path.join(g_project_root, args.build_path)
+     sandbox_path = os.path.join(build_path, ".bootstrap")
