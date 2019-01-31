@@ -91,10 +91,7 @@ The following command will clone and checkout all necessary repositories to buil
   ```$ cd -```
   
   * swift-5.0-branch:  
-  ```$ cd swift```  
-  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/master-patches/aarch64-new-master-VarArgs.patch```  
-  ```$ git apply aarch64-new-master-VarArgs.patch```  
-  ```$ cd -```
+  From 2019-01-30 changes have been merged with the `swift-5.0-branch` so patches are no longer required.
 
   * master:  
   No patches required.
