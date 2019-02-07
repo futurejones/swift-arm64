@@ -12,3 +12,4 @@ index c70c571..ac24e03 100644
  # Default options should come above this line
  
  # Options from ./configure
+ try-import %workspace%/.tf_configure.bazelrc
