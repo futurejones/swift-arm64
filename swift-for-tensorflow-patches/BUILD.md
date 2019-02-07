@@ -55,3 +55,7 @@ NOTE: Replace [USER] with your user name.
 ./swift/utils/build-script --preset=buildbot_linux_1604_tensorflow install_destdir=/home/[USER]/swift-source/install installable_package=/home/[USER]/swift-source/install/swift-tensorflow-aarch64.tar.gz
 ```
 #### Pre-built binary available here [swift-for-tensorflow-dev-2019-01-14](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev-2019-01-14)
+
+UPDATE 2019-01-07: MKL-DNN contraction kernels are now built by default.  
+MKL-DNN is compatible with x86_64 only so this needs to be disabled in the build preset.  
+`tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0` has been added to the tensorflow_build_preset.patch.
