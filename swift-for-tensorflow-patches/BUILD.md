@@ -7,7 +7,9 @@
 Add build-tools repository  
 ```curl -s https://packagecloud.io/install/repositories/swift-arm/build_tools/script.deb.sh | sudo bash```
 Install Bazel  
-```sudo apt-get install bazel=0.20.0```
+```sudo apt-get install bazel=0.20.0```  
+Additional Dependencies required for Bazel  
+```sudo apt-get install build-essential openjdk-8-jdk zip unzip```
 
 #### Patches Required.
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/aarch64-new-master-VarArgs.patch
