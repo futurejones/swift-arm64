@@ -1,0 +1,40 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index 5180fe5..0886e85 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -709,6 +709,35 @@ swift-enable-ast-verifier=0
+ #===------------------------------------------------------------------------===#
+ # Linux Builders
+ #===------------------------------------------------------------------------===#
++[preset: buildbot_linux,no_test,lite]
++mixin-preset=mixin_lightweight_assertions
++
++build-ninja
++install-swift
++
++install-prefix=/usr
++swift-install-components=autolink-driver;compiler;clang-builtin-headers;stdlib;swift-remote-mirror;sdk-overlay;license;sourcekit-inproc
++build-swift-static-stdlib
++build-swift-static-sdk-overlay
++build-swift-stdlib-unittest-extra
++
++# Path to the root of the installation filesystem.
++install-destdir=%(install_destdir)s
++
++# Path to the .tar.gz package we would create.
++installable-package=%(installable_package)s
++
++build-subdir=buildbot_linux
++release
++foundation
++libdispatch
++lit-args=-v
++
++install-foundation
++install-libdispatch
++reconfigure
++#==-----------
++
+ [preset: mixin_linux_installation]
+ mixin-preset=mixin_lightweight_assertions
+ 
