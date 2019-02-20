@@ -13,7 +13,7 @@ index 5180fe5..0886e85 100644
 +install-swift
 +
 +install-prefix=/usr
-+swift-install-components=autolink-driver;compiler;clang-builtin-headers;stdlib;swift-remote-mirror;sdk-overlay;license;sourcekit-inproc
++swift-install-components=autolink-driver;compiler;clang-builtin-headers;stdlib;swift-remote-mirror;sdk-overlay;license
 +build-swift-static-stdlib
 +build-swift-static-sdk-overlay
 +build-swift-stdlib-unittest-extra
