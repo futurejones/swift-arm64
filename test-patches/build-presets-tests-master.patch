@@ -1,12 +1,28 @@
 diff --git a/utils/build-presets.ini b/utils/build-presets.ini
-index 67c3672..fdf6114 100644
+index 67c3672..511b701 100644
 --- a/utils/build-presets.ini
 +++ b/utils/build-presets.ini
-@@ -802,6 +802,49 @@ skip-test-libicu
+@@ -802,6 +802,71 @@ skip-test-libicu
  skip-test-indexstore-db
  skip-test-sourcekit-lsp
  
 +# Linux Individual Tests
++[preset: buildbot_linux,test_swift]
++mixin-preset=buildbot_linux
++
++skip-test-cmark
++skip-test-lldb
++#skip-test-swift
++skip-test-llbuild
++skip-test-swiftpm
++skip-test-xctest
++skip-test-foundation
++skip-test-libdispatch
++skip-test-playgroundsupport
++skip-test-libicu
++skip-test-indexstore-db
++skip-test-sourcekit-lsp
++
 +[preset: buildbot_linux,test_libdispatch]
 +mixin-preset=buildbot_linux
 +
@@ -20,6 +36,8 @@ index 67c3672..fdf6114 100644
 +#skip-test-libdispatch
 +skip-test-playgroundsupport
 +skip-test-libicu
++skip-test-indexstore-db
++skip-test-sourcekit-lsp
 +
 +[preset: buildbot_linux,test_foundation]
 +mixin-preset=buildbot_linux
@@ -34,6 +52,8 @@ index 67c3672..fdf6114 100644
 +skip-test-libdispatch
 +skip-test-playgroundsupport
 +skip-test-libicu
++skip-test-indexstore-db
++skip-test-sourcekit-lsp
 +
 +[preset: buildbot_linux,test_swiftpm]
 +mixin-preset=buildbot_linux
@@ -48,6 +68,8 @@ index 67c3672..fdf6114 100644
 +skip-test-libdispatch
 +skip-test-playgroundsupport
 +skip-test-libicu
++skip-test-indexstore-db
++skip-test-sourcekit-lsp
 +
  # Linux package with out test
  [preset: buildbot_linux,no_test]
