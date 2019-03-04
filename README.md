@@ -2,7 +2,7 @@
 ## Latest build info from our CI server
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)
    
-### Swift 4.2.2 &nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/5/badge/icon)](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE)
+### Swift 4.2.3 &nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/5/badge/icon)](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE)
 ### Swift 5.0 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.0-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.0-aarch64)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-master-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64)
 
@@ -87,7 +87,8 @@ The following command will clone and checkout all necessary repositories to buil
   ```$ git apply swift-4.2-aarch64-VarArgs.patch```  
   ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swift-4.2-patches/swift-4.2-pm-fix.patch```  
   ```$ git apply swift-4.2-pm-fix.patch```  
-  ```$ cd -```
+  ```$ cd -```  
+  NOTE: From v4.2.3 swift-4.2-branch no longer needs patching.
   
   * swift-5.0-branch:  
   From 2019-01-30 changes have been merged with the `swift-5.0-branch` so patches are no longer required.
