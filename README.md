@@ -41,9 +41,9 @@ An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Rasp
 *Tested on RPi3B and RPi3B+.*  
 *Should also install on RPi3A+ and maybe the Compute Module 3.*
 
-Download image here - [http://cdimage.ubuntu.com/releases/18.04/beta/](http://cdimage.ubuntu.com/releases/18.04/beta/)
+Download image here - [http://cdimage.ubuntu.com/releases/18.04/release/](http://cdimage.ubuntu.com/releases/18.04/release/)
 
-Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2_arm64.deb](https://packagecloud.io/swift-arm/release/packages/ubuntu/bionic/swift4_4.2_arm64.deb)
+Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2.2_arm64.deb](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
 
 ## Swift 5.0 Developer Snapshots
 Swift 5.0 developer snapshots are now available for Ubuntu 16.04.  
