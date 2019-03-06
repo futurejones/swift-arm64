@@ -1,0 +1,53 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index 1dd8054..7e00f96 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -781,6 +781,48 @@ skip-test-libdispatch
+ skip-test-playgroundsupport
+ skip-test-libicu
+ 
++# Linux Individual Tests
++[preset: buildbot_linux,test_libdispatch]
++mixin-preset=buildbot_linux
++
++skip-test-cmark
++skip-test-lldb
++skip-test-swift
++skip-test-llbuild
++skip-test-swiftpm
++skip-test-xctest
++skip-test-foundation
++#skip-test-libdispatch
++skip-test-playgroundsupport
++skip-test-libicu
++
++[preset: buildbot_linux,test_foundation]
++mixin-preset=buildbot_linux
++
++skip-test-cmark
++skip-test-lldb
++skip-test-swift
++skip-test-llbuild
++skip-test-swiftpm
++skip-test-xctest
++#skip-test-foundation
++skip-test-libdispatch
++skip-test-playgroundsupport
++skip-test-libicu
++
++[preset: buildbot_linux,test_swiftpm]
++mixin-preset=buildbot_linux
++
++skip-test-cmark
++skip-test-lldb
++skip-test-swift
++skip-test-llbuild
++#skip-test-swiftpm
++skip-test-xctest
++skip-test-foundation
++skip-test-libdispatch
++skip-test-playgroundsupport
++skip-test-libicu
+ 
+ # Ubuntu 16.10 preset for backwards compat and future customizations.
+ [preset: buildbot_linux_1610]
