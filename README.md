@@ -19,17 +19,22 @@ Add repo -
 $ curl -s https://packagecloud.io/install/repositories/swift-arm/release/script.deb.sh | sudo bash
 ``` 
 
-Install Swift - 
+Install Swift 4.-.- 
 
 ```bash
 $ sudo apt-get install swift4
+```
+Install Swift 5.-.- 
+
+```bash
+$ sudo apt-get install swift5
 ```
 ### Tested Servers
 *c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
 *Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
-*Rock64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org)  
+*Rock64 / RockPro64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org)  
 *RaspberryPi 3 models* - Ubuntu 18.04 64bit  
 *ODROID-C2* - Ubuntu 16.04.4 LTS xenial
 
@@ -43,7 +48,7 @@ An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Rasp
 
 Download image here - [http://cdimage.ubuntu.com/releases/18.04/release/](http://cdimage.ubuntu.com/releases/18.04/release/)
 
-Swift 4.2 AArch64 for Ubuntu 18.04 is available here - [swift4_4.2.2_arm64.deb](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
+Swift 4 / 5 AArch64 for Ubuntu 18.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
 
 ## Swift 5.0 Developer Snapshots
 Swift 5.0 developer snapshots are now available for Ubuntu 16.04.  
