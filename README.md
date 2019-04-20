@@ -55,7 +55,7 @@ Swift 5.0 developer snapshots are now available for Ubuntu 16.04.
 Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases)
 
 ## Swift for TensorFlow
-[Developer Snapshot](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev-2019-01-14)  
+[Developer Snapshot](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev)  
 [Build instructions](https://github.com/futurejones/swift-arm64/blob/master/swift-for-tensorflow-patches/BUILD.md#build-instructions-for-swift-for-tensorflow-on-ubuntu-1604)
 
 ## Building Swift
