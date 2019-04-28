@@ -9,7 +9,7 @@ index 18530bf..8ac1aa2 100644
 +# Ubuntu 16.04 preset for Tensorflow on AArch64.
 +[preset: buildbot_linux_1604_tensorflow]
 +mixin-preset=buildbot_linux,no_test
-+enable-tensorflow-gpu
++enable-tensorflow
 +tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0
 +
  # Ubuntu 18.04 preset for backwards compat and future customizations.
