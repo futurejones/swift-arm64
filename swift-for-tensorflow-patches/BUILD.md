@@ -59,7 +59,7 @@ NOTE: Replace [USER] with your user name.
 
 UPDATE 2019-02-07: MKL-DNN contraction kernels are now built by default.  
 MKL-DNN is compatible with x86_64 only so this needs to be disabled in the build preset.  
-`tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0` has been with the `tensorflow_preset_mkldnn.patch`.
+`tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0` has been added with the `tensorflow_preset_mkldnn.patch`.
 
 UPDATE 2019-05-06: The `build_presets` patch has been updated to use the `tensorflow_linux` presets.  
 Presets available are:  
