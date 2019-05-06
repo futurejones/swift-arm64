@@ -14,9 +14,8 @@ Additional Dependencies required for Bazel
 #### Patches Required.
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/aarch64-new-master-VarArgs.patch
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/goldLinkerUnixToolChains.patch
-* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_build_preset.patch
+* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/fix-aws-s3.patch
-
 
 #### Build Info
 Create source directory  
@@ -34,8 +33,8 @@ cd swift
 wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/aarch64-new-master-VarArgs.patch
 git apply aarch64-new-master-VarArgs.patch
 
-wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_build_preset.patch
-git apply tensorflow_build_preset.patch
+wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch
+git apply tensorflow_preset_mkldnn.patch
 
 wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/goldLinkerUnixToolChains.patch
 git apply goldLinkerUnixToolChains.patch
@@ -54,10 +53,17 @@ cd -
 Build Swift for TensorFlow  
 NOTE: Replace [USER] with your user name.
 ```
-./swift/utils/build-script --preset=buildbot_linux_1604_tensorflow install_destdir=/home/[USER]/swift-source/install installable_package=/home/[USER]/swift-source/install/swift-tensorflow-aarch64.tar.gz
+./swift/utils/build-script --preset=tensorflow_linux,no_test install_destdir=/home/[USER]/swift-source/install installable_package=/home/[USER]/swift-source/install/swift-tensorflow-aarch64.tar.gz
 ```
 #### Latest Pre-built binarys available here [swift-for-tensorflow-dev](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev)
 
 UPDATE 2019-02-07: MKL-DNN contraction kernels are now built by default.  
 MKL-DNN is compatible with x86_64 only so this needs to be disabled in the build preset.  
-`tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0` has been added to the tensorflow_build_preset.patch.
+`tensorflow_bazel_options=--define=tensorflow_mkldnn_contraction_kernel=0` has been with the `tensorflow_preset_mkldnn.patch`.
+
+UPDATE 2019-05-06: The `build_presets` patch has been updated to use the `tensorflow_linux` presets.
+Presets available are:  
+`tensorflow_linux`  
+`tensorflow_linux,no_test`  
+`tensorflow_linux,gpu`  
+`tensorflow_linux,gpu,no_test`
