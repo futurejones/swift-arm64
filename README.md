@@ -61,10 +61,10 @@ Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases)
 ## Building Swift
 
 *Swift development on AArch64 systems is currently possible on Ubuntu 16.04 and 18.04.*  
-*The following build instructions are for Ubuntu 16.04.*
+*The following build instructions are for Ubuntu 16.04 and 18.04.*
 
 ### Setting up the Swift development environment
-* If possible start with a new clean install of Ubuntu 16.04 and then update and upgrade your system:  
+* If possible start with a new clean install of Ubuntu 16.04 / 18.04 and then update and upgrade your system:  
 ```$ sudo apt-get update```  
 ```$ sudo apt-get upgrade```
 * Install development dependencies:  
