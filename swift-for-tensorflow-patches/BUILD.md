@@ -1,4 +1,4 @@
-## Build instructions for Swift for TensorFlow on Ubuntu 16.04
+## Build instructions for Swift for TensorFlow on Ubuntu 16.04 / 18.04
 
 #### Development Dependencies Required
 ```sudo apt-get install git cmake ninja-build clang python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev systemtap-sdt-dev tzdata rsync```
