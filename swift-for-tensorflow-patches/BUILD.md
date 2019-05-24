@@ -11,9 +11,9 @@ Install Bazel  (This will install version 0.24.1)
 Additional Dependencies required for Bazel  
 ```sudo apt-get install build-essential openjdk-8-jdk zip unzip```
 
-#### Patches Required.
-* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/aarch64-new-master-VarArgs.patch
-* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/goldLinkerUnixToolChains.patch
+#### Patches Required.  
+UPDATE: 25/05/2019  
+The `tensorflow` branch has been updated and no longer requires the "VarArgs" or "goldLinker" patches. 
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/fix-aws-s3.patch
 
@@ -30,14 +30,9 @@ Checkout tensorflow branch and supporting repositories
 Apply patches to swift directory  
 ```
 cd swift 
-wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/aarch64-new-master-VarArgs.patch
-git apply aarch64-new-master-VarArgs.patch
 
 wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch
 git apply tensorflow_preset_mkldnn.patch
-
-wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/goldLinkerUnixToolChains.patch
-git apply goldLinkerUnixToolChains.patch
 
 cd -
 ```
