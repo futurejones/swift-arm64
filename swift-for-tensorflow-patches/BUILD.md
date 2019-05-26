@@ -14,8 +14,9 @@ Additional Dependencies required for Bazel
 #### Patches Required.  
 UPDATE: 25/05/2019  
 The `tensorflow` branch has been updated and no longer requires the "VarArgs" or "goldLinker" patches. 
-* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch
-* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/fix-aws-s3.patch
+* https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch  
+UPDATE: 26/05/2019 aws fix is no longer needed as changes have been merged.
+
 
 #### Build Info
 Create source directory  
@@ -37,12 +38,8 @@ git apply tensorflow_preset_mkldnn.patch
 cd -
 ```
 
-Apply patches to tensorflow directory  
+Patches are no longer needed to tensorflow directory  
 ```
-cd tensorflow
-wget https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/fix-aws-s3.patch
-git apply fix-aws-s3.patch
-cd -
 ```
 
 Build Swift for TensorFlow  
