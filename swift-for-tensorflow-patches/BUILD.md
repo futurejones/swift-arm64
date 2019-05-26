@@ -15,6 +15,7 @@ Additional Dependencies required for Bazel
 UPDATE: 25/05/2019  
 The `tensorflow` branch has been updated and no longer requires the "VarArgs" or "goldLinker" patches. 
 * https://github.com/futurejones/swift-arm64/raw/master/swift-for-tensorflow-patches/tensorflow_preset_mkldnn.patch  
+
 UPDATE: 26/05/2019 aws fix is no longer needed as changes have been merged.
 
 
