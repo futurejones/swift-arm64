@@ -1,9 +1,8 @@
 # Swift for Arm64/AArch64 Servers and SBC's
 ## Latest build info from our CI server
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)
-   
-### Swift 4.2.4 &nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE/badge/icon)](http://futurejones.xyz:8080/job/swift-4.2-aarch64-RELEASE)
-### Swift 5.0 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.0-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.0-aarch64)
+
+### Swift 5.1 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci-external.swift.org/job/oss-swift-5.1-RA-linux-ubuntu-16.04-aarch64/badge/icon)](https://ci-external.swift.org/job/oss-swift-5.1-RA-linux-ubuntu-16.04-aarch64)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-master-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64)
 
 # Swift-Arm64
