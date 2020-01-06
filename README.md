@@ -46,9 +46,9 @@ Download image here - http://cdimage.ubuntu.com/releases/eoan/release/
 
 Swift 5 AArch64 for Ubuntu 18.04 / 19.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
 
-## Swift 5.1 Developer Snapshots
-Swift 5.1 developer snapshots are now available for Ubuntu 16.04 / 1804.  
-Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases/tag/swift-5.1-dev-ubuntu)
+## Swift 5.2 Developer Snapshots
+Swift 5.2 developer snapshots are now available for Ubuntu 16.04 / 1804.  
+Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases/tag/v5.2-dev-snapshot)
 
 ## Swift for TensorFlow
 [Developer Snapshot](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev)  
