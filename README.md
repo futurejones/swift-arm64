@@ -18,11 +18,6 @@ Add repo -
 $ curl -s https://packagecloud.io/install/repositories/swift-arm/release/script.deb.sh | sudo bash
 ``` 
 
-Install Swift 4.-.- 
-
-```bash
-$ sudo apt-get install swift4
-```
 Install Swift 5.-.- 
 
 ```bash
@@ -34,10 +29,10 @@ $ sudo apt-get install swift5
 ### Tested Boards and OS's
 
 *Rock64 / RockPro64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org)  
-*RaspberryPi 3 models* - Ubuntu 18.04 64bit  
+*RaspberryPi 3 / 4 models* - Ubuntu 18.04 64bit  
 *ODROID-C2* - Ubuntu 16.04.4 LTS xenial
 
-### RaspberyPi 3 64bit OS
+### RaspberyPi 3 / 4 64bit OS
 
 An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Raspberry Pi 3.
 
@@ -47,7 +42,7 @@ An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Rasp
 
 Download image here - [http://cdimage.ubuntu.com/releases/18.04/release/](http://cdimage.ubuntu.com/releases/18.04/release/)
 
-Swift 4 / 5 AArch64 for Ubuntu 18.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
+Swift 5 AArch64 for Ubuntu 18.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release/search?dist=ubuntu%2Fbionic)
 
 ## Swift 5.1 Developer Snapshots
 Swift 5.1 developer snapshots are now available for Ubuntu 16.04 / 1804.  
@@ -97,8 +92,18 @@ The following command will clone and checkout all necessary repositories to buil
   * swift-5.0-branch:  
   From 2019-01-30 changes have been merged with the `swift-5.0-branch` so patches are no longer required.
 
+  * swift-5.2-branch:  
+  Currently requires a patch for the swift package manager.  
+  ```$ cd swift```  
+  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```  
+  ```$ git apply triple-gnu.patch```
+  
   * master:  
-  No patches required.
+  Currently requires a patch for the swift package manager.  
+  ```$ cd swift```  
+  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```  
+  ```$ git apply triple-gnu.patch```
+  
 
 ### Building with Ninja
 * The ```build-script``` is a high-level build automation script that supports basic options such as building a Swift-compatible LLDB, building the Swift Package Manager, building for various platforms, running tests after builds, and more.  
