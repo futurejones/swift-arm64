@@ -1,0 +1,13 @@
+diff --git a/utils/update_checkout/update-checkout-config.json b/utils/update_checkout/update-checkout-config.json
+index 071e45d4ab..476432e55b 100644
+--- a/utils/update_checkout/update-checkout-config.json
++++ b/utils/update_checkout/update-checkout-config.json
+@@ -228,7 +228,7 @@
+             "repos": {
+                 "llvm-project": "swift/swift-5.1-branch",
+                 "swift": "swift-5.1-branch",
+-                "cmark": "master",
++                "cmark": "swift-5.1-branch",
+                 "llbuild": "swift-5.1-branch",
+                 "swiftpm": "swift-5.1-branch",
+                 "swift-syntax": "swift-5.1-branch",
