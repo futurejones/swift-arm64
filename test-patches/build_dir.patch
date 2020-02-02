@@ -1,0 +1,12 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index b924eac..960f5a1 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -765,6 +765,7 @@ toolchain-benchmarks
+ 
+ # Path to the root of the installation filesystem.
+ install-destdir=%(install_destdir)s
++build-dir=%(build_dir)s
+ 
+ # Path to the .tar.gz package we would create.
+ installable-package=%(installable_package)s
