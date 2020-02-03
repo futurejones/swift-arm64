@@ -97,15 +97,17 @@ The following command will clone and checkout all necessary repositories to buil
 
   * swift-5.2-branch:  
   Currently requires a patch for the swift package manager.  
-  ```$ cd swift```  
-  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```  
-  ```$ git apply triple-gnu.patch```
+  ~~```$ cd swift```~~  
+  ~~```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```~~  
+  ~~```$ git apply triple-gnu.patch```~~  
+  fixed
   
   * master:  
   Currently requires a patch for the swift package manager.  
-  ```$ cd swift```  
-  ```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```  
-  ```$ git apply triple-gnu.patch```
+  ~~```$ cd swift```~~  
+  ~~```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```~~  
+  ~~```$ git apply triple-gnu.patch```~~  
+  fixed
   
 
 ### Building with Ninja
