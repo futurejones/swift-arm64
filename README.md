@@ -65,7 +65,7 @@ Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases/
 ```$ sudo apt-get update```  
 ```$ sudo apt-get upgrade```
 * Install development dependencies:  
-```$ sudo apt-get install git cmake ninja-build clang python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev systemtap-sdt-dev tzdata rsync```  
+```$ sudo apt-get install git cmake ninja-build clang python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev systemtap-sdt-dev tzdata rsync python-six```  
 
 ### Getting Sources for Swift and Related Projects
 * First create a directory for all of the Swift sources:  
