@@ -1,0 +1,12 @@
+diff --git a/test/Reflection/typeref_decoding_asan.swift b/test/Reflection/typeref_decoding_asan.swift
+index 21985b1205..7fd60538de 100644
+--- a/test/Reflection/typeref_decoding_asan.swift
++++ b/test/Reflection/typeref_decoding_asan.swift
+@@ -1,4 +1,7 @@
+ // REQUIRES: asan_runtime
++
++// XFAIL: OS=linux-gnu && CPU=aarch64
++
+ // RUN: %empty-directory(%t)
+ // RUN: %target-build-swift %S/Inputs/ConcreteTypes.swift %S/Inputs/GenericTypes.swift %S/Inputs/Protocols.swift %S/Inputs/Extensions.swift %S/Inputs/Closures.swift -parse-as-library -emit-module -emit-library -module-name TypesToReflect -sanitize=address -o %t/%target-library-name(TypesToReflect)
+ // RUN: %target-swift-reflection-dump -binary-filename %t/%target-library-name(TypesToReflect) | %FileCheck %s
