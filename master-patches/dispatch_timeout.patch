@@ -1,0 +1,13 @@
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index a276035..453d0e5 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -98,7 +98,7 @@ function(add_unit_test name)
+            COMMAND bsdtestharness $<TARGET_FILE:${name}>)
+   set_tests_properties(${name}
+                        PROPERTIES
+-                         TIMEOUT 120
++                         TIMEOUT 200
+                          DEPENDS bsdtestharness
+                          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+   if(NOT leaks_EXECUTABLE)
