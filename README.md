@@ -109,7 +109,10 @@ The following command will clone and checkout all necessary repositories to buil
   ~~```$ cd swift```~~  
   ~~```$ wget https://github.com/futurejones/swift-arm64/raw/master/swiftpm/triple-gnu.patch```~~  
   ~~```$ git apply triple-gnu.patch```~~  
-  fixed
+  fixed  
+
+  * release/5.3:  
+  No patches required.  
   
   * master:  
   Currently requires a patch for the swift package manager.  
