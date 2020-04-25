@@ -36,13 +36,8 @@ $ sudo apt-get install swift5
 
 ### RaspberyPi 3 / 4 64bit OS
 
-An official 64 bit Ubuntu "Bionic" 18.04 install image is now available for Raspberry Pi 3.
+An official 64 bit Ubuntu install image is now available for Raspberry Pi 2/3/4.
 
-*Note: This is a lite server image for headless operation.*  
-*Tested on RPi3B and RPi3B+.*  
-*Should also install on RPi3A+ and maybe the Compute Module 3.*
-
-Download image here - [http://cdimage.ubuntu.com/releases/18.04/release/](http://cdimage.ubuntu.com/releases/18.04/release/)  
 ### Ubuntu Focal 20.04 now available for Raspberry Pi  
 Download image here - https://ubuntu.com/download/raspberry-pi  
 
