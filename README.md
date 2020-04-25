@@ -46,7 +46,7 @@ Download image here - [http://cdimage.ubuntu.com/releases/18.04/release/](http:/
 ### Ubuntu Focal 20.04 now available for Raspberry Pi  
 Download image here - https://ubuntu.com/download/raspberry-pi  
 
-Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release/
+Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release)
 
 ## Swift 5.2 Developer Snapshots
 Swift 5.2 developer snapshots are now available for Ubuntu 16.04 / 1804.  
