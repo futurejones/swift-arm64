@@ -72,7 +72,9 @@ If your version is less than 3.15.2 you have 2 choices
 1. Do nothing. Swift build will automatically download the cmake source code and build cmake version 3.15.1. before starting the swift build. NOTE* This will take considerable time depending on your build machine.  
 2. Download and install cmake 3.15.2 from swift-arm/build_tools repo  
 ```$ curl -s https://packagecloud.io/install/repositories/swift-arm/build_tools/script.deb.sh | sudo bash```  
-```$ sudo apt-get install cmake```
+```$ sudo apt-get install cmake```  
+
+*NOTE: Minimum CMake version for Swift 5.3: is now 3.16.5*
 
 ### Getting Sources for Swift and Related Projects
 * First create a directory for all of the Swift sources:  
