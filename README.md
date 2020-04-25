@@ -4,6 +4,7 @@ The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.
 
 ### Swift 5.1 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.1-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.1-aarch64/)
 ### Swift 5.2 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.2-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.2-aarch64/)
+### Swift 5.3 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/swift-5.3/job/swift-5.3-aarch64-16.04/badge/icon)](http://futurejones.xyz:8080/view/swift-5.3/job/swift-5.3-aarch64-16.04/)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-master-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64/)
 
 # Swift-Arm64
