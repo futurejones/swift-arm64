@@ -47,9 +47,6 @@ Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm 
 Swift 5.3 developer snapshots are now available for Ubuntu 16.04 / 1804.  
 Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases/tag/v5.3-dev-snapshot)
 
-## Swift for TensorFlow
-[Developer Snapshot](https://github.com/futurejones/swift-arm64/releases/tag/swift-for-tensorflow-dev)  
-[Build instructions](https://github.com/futurejones/swift-arm64/blob/master/swift-for-tensorflow-patches/BUILD.md#build-instructions-for-swift-for-tensorflow-on-ubuntu-1604)
 
 ## Building Swift
 
