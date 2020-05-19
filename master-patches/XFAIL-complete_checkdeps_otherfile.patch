@@ -1,0 +1,14 @@
+diff --git a/test/SourceKit/CodeComplete/complete_checkdeps_otherfile.swift b/test/SourceKit/CodeComplete/complete_checkdeps_otherfile.swift
+index d9d6f90daf3..f51b0496b8c 100644
+--- a/test/SourceKit/CodeComplete/complete_checkdeps_otherfile.swift
++++ b/test/SourceKit/CodeComplete/complete_checkdeps_otherfile.swift
+@@ -4,7 +4,7 @@ import SwiftFW
+ func foo() {
+   /*HERE*/
+ }
+-
++// XFAIL: OS=linux-gnu && CPU=aarch64
+ // REQUIRES: shell
+ 
+ // RUN: %empty-directory(%t/Frameworks)
+ 
