@@ -1,0 +1,12 @@
+diff --git a/test/SourceKit/CodeComplete/complete_checkdeps_bridged.swift b/test/SourceKit/CodeComplete/complete_checkdeps_bridged.swift
+index 2675887fc0d..653da571148 100644
+--- a/test/SourceKit/CodeComplete/complete_checkdeps_bridged.swift
++++ b/test/SourceKit/CodeComplete/complete_checkdeps_bridged.swift
+@@ -5,6 +5,7 @@ func foo() {
+   /*HERE*/
+ }
+ 
++// XFAIL: OS=linux-gnu && CPU=aarch64
+ // REQUIRES: shell
+ 
+ // RUN: %empty-directory(%t/Frameworks)
