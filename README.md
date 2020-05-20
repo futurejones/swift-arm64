@@ -2,10 +2,10 @@
 ## Latest build info from our CI server
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)
 
-### Swift 5.1 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.1-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.1-aarch64/)
-### Swift 5.2 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-5.2-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-5.2-aarch64/)
-### Swift 5.3 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/swift-5.3/job/swift-5.3-aarch64-16.04/badge/icon)](http://futurejones.xyz:8080/view/swift-5.3/job/swift-5.3-aarch64-16.04/)
-### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/job/swift-master-aarch64/badge/icon)](http://futurejones.xyz:8080/job/swift-master-aarch64/)
+### Swift 5.1 &nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.1-aarch64-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.1-aarch64-18.04/)
+### Swift 5.2 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.3-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.3-ubuntu-18.04/)
+### Swift 5.3 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/)
+### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/)
 
 # Swift-Arm64
 Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
