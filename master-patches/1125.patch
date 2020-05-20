@@ -1,0 +1,21 @@
+From b72f86817e4f9f1fffd0afea87de3530ee5bad51 Mon Sep 17 00:00:00 2001
+From: Ron Olson <tachoknight@gmail.com>
+Date: Mon, 27 Apr 2020 09:25:48 -0500
+Subject: [PATCH] Added <cstdlib> header for std::abort
+
+---
+ clang-tools-extra/clangd/Shutdown.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/clang-tools-extra/clangd/Shutdown.cpp b/clang-tools-extra/clangd/Shutdown.cpp
+index dfea46d8dfeb..36d977570a4f 100644
+--- a/clang-tools-extra/clangd/Shutdown.cpp
++++ b/clang-tools-extra/clangd/Shutdown.cpp
+@@ -9,6 +9,7 @@
+ #include "Shutdown.h"
+ 
+ #include <atomic>
++#include <cstdlib>
+ #include <thread>
+ 
+ namespace clang {
