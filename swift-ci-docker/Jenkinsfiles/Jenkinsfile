@@ -18,9 +18,7 @@ pipeline {
       stage('Clean Workspace') {
          steps {
             echo 'Cleaning Workspace'
-            sh label: '', script: '''#!/bin/bash
-            shopt -s extglob
-            sudo rm -rf !("Jenkinsfile")'''
+            cleanWs()
             sh 'mkdir output'
          }
       }
