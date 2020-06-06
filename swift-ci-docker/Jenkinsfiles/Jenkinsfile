@@ -1,0 +1,133 @@
+// Jenkins Pipeline - sample
+pipeline {
+   agent { label 'node-name' }
+
+   environment {
+        def DATE = sh(script: "echo `date +%Y-%m-%d`", returnStdout: true).trim()
+        SWIFT_BRANCH = 'master'
+        SWIFT_TAG = 'master'
+        SWIFT_SCHEME = 'master'
+        SWIFT_VERSION = '5.3'
+        RELEASE = 'dev' // change to 'release' for RELEASE versions
+        DOCKER_IMAGE = 'image-name'
+        OS = 'name'
+        OS_VERSION = 'version'
+        WORK_DIR = '/home/build-user'
+   }
+   stages {
+      stage('Clean Workspace') {
+         steps {
+            echo 'Cleaning Workspace'
+            sh label: '', script: '''#!/bin/bash
+            shopt -s extglob
+            sudo rm -rf !("Jenkinsfile")'''
+            sh 'mkdir output'
+         }
+      }
+      stage('Checkout Swift') {
+         steps {
+            echo "Clone swift: ${SWIFT_BRANCH}"
+            checkout([$class: 'GitSCM', branches: [[name: "*/${SWIFT_BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'swift']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/apple/swift.git']]])
+         }
+      }
+      stage('Update Checkout') {
+         steps {
+            echo "scheme=${SWIFT_SCHEME}: cloning supporting repos"
+            sh "./swift/utils/update-checkout --clone --scheme ${SWIFT_SCHEME}" // change to --tag for RELEASE versions
+         }
+      }
+      stage('Apply Patches') {
+         steps {
+            echo 'Apply Patches'
+            dir('swift') {
+               echo "no patches needed"
+            }
+         }
+      }
+      stage('Pull Docker Image') {
+         steps {
+            echo 'Getting Docker Image'
+            sh "docker pull ${DOCKER_IMAGE}"
+         }
+      }
+      stage('Build Swift') {
+         steps {
+            echo 'Building toolchain'
+            sh "docker rm -f ${JOB_NAME} || true"
+            sh "docker volume rm ${JOB_NAME} || true"
+            sh "docker run \
+               --cap-add=SYS_PTRACE \
+               --security-opt seccomp=unconfined \
+               --name ${JOB_NAME} \
+               -w ${WORK_DIR} \
+               -v ${WORKSPACE}:/source \
+               -v ${JOB_NAME}:${WORK_DIR} \
+               ${DOCKER_IMAGE} \
+               /bin/bash -lc \
+               'cp -r /source/* ${WORK_DIR}; \
+               ./swift/utils/build-script \
+               --preset buildbot_linux,no_test \
+               install_destdir=${WORK_DIR}/swift-install \
+               installable_package=${WORK_DIR}/output/${JOB_NAME}-${RELEASE}-aarch64-${BUILD_ID}-${DATE}.tar.gz'"
+         }
+      }
+      stage('Archive') {
+         steps {
+            echo 'Archive Build'
+            sh "docker cp ${JOB_NAME}:${WORK_DIR}/output/${JOB_NAME}-${RELEASE}-aarch64-${BUILD_ID}-${DATE}.tar.gz output/"
+            archiveArtifacts 'output/*.tar.gz'
+         }
+      }
+      stage('Package DEB') {
+          steps {
+             dir('output') {
+               echo "building deb"
+               sh "rm *.deb || true"
+               sh "fpm \
+                  -s tar \
+                  -t deb \
+                  -a arm64 \
+                  --name swift-lang \
+                  --version ${SWIFT_VERSION} \
+                  --iteration ${BUILD_NUMBER}-${OS}-${OS_VERSION} \
+                  -d binutils \
+                  -d git \
+                  -d gnupg2 \
+                  -d libc6-dev \
+                  -d libcurl4 \
+                  -d libedit2 \
+                  -d libgcc-9-dev \
+                  -d libpython2.7 \
+                  -d libsqlite3-0 \
+                  -d libstdc++-9-dev \
+                  -d libxml2 \
+                  -d libz3-dev \
+                  -d pkg-config \
+                  -d tzdata \
+                  -d zlib1g-dev \
+                  --replaces swift5 \
+                  --replaces clang \
+                  --replaces clang-10 \
+                  --replaces lldb \
+                  --replaces llvm \
+                  --maintainer 'Neil Jones neil@swift-arm.com' \
+                  --deb-priority optional \
+                  --url 'https://swift.org' \
+                  --description 'The Swift Programming Language - Swift-Arm Community Release.' \
+                  --license 'Apache License Version 2.0' \
+                  --deb-no-default-config-files \
+                  *.tar.gz"
+               echo "uploading package"
+               sh "package_cloud push swift-arm/dev-builds/${OS}/${OS_VERSION} *.deb"
+             }
+          }
+      }
+      stage('Cleanup Docker') {
+          steps {
+              echo 'remove docker container'
+              sh "docker rm -f ${JOB_NAME}"
+              sh "docker volume rm ${JOB_NAME}"
+          }
+      }
+   }
+}
