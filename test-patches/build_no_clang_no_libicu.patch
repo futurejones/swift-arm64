@@ -1,0 +1,87 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index d51ca412f28..e57f1d15446 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -773,8 +773,9 @@ swift-enable-ast-verifier=0
+ # Linux Builders
+ #===------------------------------------------------------------------------===#
+ [preset: mixin_linux_install_components_with_clang]
+-swift-install-components=autolink-driver;compiler;clang-resource-dir-symlink;stdlib;swift-remote-mirror;sdk-overlay;parser-lib;toolchain-tools;license;sourcekit-inproc
+-llvm-install-components=llvm-cov;llvm-profdata;IndexStore;clang;clang-resource-headers;compiler-rt;clangd;lld
++swift-install-components=autolink-driver;compiler;clang-resource-dir-symlink;stdlib;swift-remote-mirror;sdk-overlay;parser-lib;toolchain-tools;license
++#;sourcekit-inproc
++#llvm-install-components=llvm-cov;llvm-profdata;IndexStore;clang;clang-resource-headers;compiler-rt;clangd;lld
+ 
+ [preset: mixin_linux_installation]
+ mixin-preset=
+@@ -784,21 +785,21 @@ mixin-preset=
+ llbuild
+ swiftpm
+ xctest
+-libicu
++#libicu
+ libcxx
+ 
+ dash-dash
+ 
+ build-ninja
+ install-swift
+-install-lldb
++#install-lldb
+ install-llbuild
+ install-swiftpm
+ install-xctest
+-install-libicu
++#install-libicu
+ install-prefix=/usr
+ install-libcxx
+-install-sourcekit-lsp
++#install-sourcekit-lsp
+ build-swift-static-stdlib
+ build-swift-static-sdk-overlay
+ build-swift-stdlib-unittest-extra
+@@ -806,10 +807,10 @@ build-swift-stdlib-unittest-extra
+ # Executes the lit tests for the installable package that is created
+ # Assumes the swift-integration-tests repo is checked out
+ 
+-test-installable-package
++#test-installable-package
+ 
+ # Build the benchmarks against the toolchain.
+-toolchain-benchmarks
++#toolchain-benchmarks
+ 
+ # Path to the root of the installation filesystem.
+ install-destdir=%(install_destdir)s
+@@ -820,23 +821,23 @@ installable-package=%(installable_package)s
+ [preset: buildbot_linux]
+ mixin-preset=mixin_linux_installation
+ build-subdir=buildbot_linux
+-lldb
++#lldb
+ release
+-test
+-validation-test
+-long-test
+-stress-test
++#test
++#validation-test
++#long-test
++#stress-test
+ test-optimized
+ foundation
+ libdispatch
+-indexstore-db
+-sourcekit-lsp
++#indexstore-db
++#sourcekit-lsp
+ lit-args=-v --time-tests
+ 
+ dash-dash
+ 
+ # rdar://problem/31454823
+-lldb-test-swift-only
++#lldb-test-swift-only
+ 
+ install-foundation
+ install-libdispatch
