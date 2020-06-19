@@ -25,7 +25,8 @@ index d8f302ffe4c..1a8929f383c 100644
  dash-dash
 @@ -795,14 +796,14 @@ dash-dash
  build-ninja
- install-llvm
+-install-llvm
++#install-llvm
  install-swift
 -install-lldb
 +#install-lldb
