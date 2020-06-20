@@ -1,0 +1,15 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index d51ca412f28..a87a7fed7f3 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -842,6 +842,10 @@ install-foundation
+ install-libdispatch
+ reconfigure
+ 
++# add pythonkit
++pythonkit
++install-pythonkit
++
+ [preset: mixin_buildbot_linux,no_test]
+ dash-dash
+ 
