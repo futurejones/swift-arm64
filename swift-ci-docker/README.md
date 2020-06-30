@@ -169,7 +169,7 @@ install_destdir=/home/build-user/swift-install \
 installable_package=/home/build-user/output/swift-ubuntu-focal-master-aarch64.tar.gz'
 ```
 Command details:-
-```docker
+```python
 docker run \
 --cap-add=SYS_PTRACE \
 --security-opt seccomp=unconfined \
