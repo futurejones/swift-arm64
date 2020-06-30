@@ -55,7 +55,7 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
  ```
- Docker is now installed. For more information go to [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
+ Docker is now installed. For more information Docker installation go to [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
 
 # Building Docker Images - The Dockerfile
 Docker images are built from `Dockerfiles`. The `Dockerfiles` used for building `swift-arm` are based on the official `Dockerfiles` from [swift-docker](https://github.com/apple/swift-docker/tree/master/swift-ci).
@@ -149,7 +149,7 @@ Now that we have the `source code` we are ready to use the docker `image` to cre
 ```bash
 docker pull swiftarm/ubuntu_focal
 ```
-* Use `docker run` to create a container and build `swift`. In this build command you will see several security options and tags used. Please the [Docker Docs](https://docs.docker.com/engine/reference/commandline/container_run/) for detailed info on each of these items.
+* Use `docker run` to create a container and build `swift`. In this build command you will see several security options and tags used. Please read the [Docker Docs](https://docs.docker.com/engine/reference/commandline/container_run/) for detailed info on each of these items.
 ```bash
 docker run \
 --cap-add=SYS_PTRACE \
@@ -170,11 +170,11 @@ installable_package=/home/build-user/output/swift-ubuntu-focal-master-aarch64.ta
 docker run \
 --cap-add=SYS_PTRACE \
 --security-opt seccomp=unconfined \
---name swift-ubuntu-focal \ # Name of the container
--w /home/build-user \ # Name of the work directory - matches the Dockerfile
--v ~/swift-source:/source \ # Mounted volume for swift source
--v swift-ubuntu-focal:/home/build-user \ # Mounted volume for home directory
-swiftarm/ubuntu_focal \ # Name of docker image being used
+--name swift-ubuntu-focal \                 # Name of the container
+-w /home/build-user \                       # Name of the work directory - matches the Dockerfile
+-v ~/swift-source:/source \                 # Mounted volume for swift source
+-v swift-ubuntu-focal:/home/build-user \    # Mounted volume for home directory
+swiftarm/ubuntu_focal \                     # Name of docker image being used
 /bin/bash -lc \
 # bash commands run inside the container 1:copy swift-source to mounted volume 2:build swift
 'cp -r /source/* /home/build-user; \ 
