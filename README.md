@@ -30,7 +30,11 @@ Install Swift 5.-.-
 
 ```bash
 $ sudo apt-get install swift5
-```
+```  
+NOTE: From Swift version 5.2.4 onwards the install package will be named `swift-lang`
+```bash
+$ sudo apt-get install swift-lang
+```  
 ### Tested Servers
 *c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
 *Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
