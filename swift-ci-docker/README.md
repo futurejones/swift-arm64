@@ -55,7 +55,7 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
  ```
- Docker is now installed. For more information Docker installation go to [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
+ Docker is now installed. For more information on Docker installation go to [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
 
 # Building Docker Images - The Dockerfile
 Docker images are built from `Dockerfiles`. The `Dockerfiles` used for building `swift-arm` are based on the official `Dockerfiles` from [swift-docker](https://github.com/apple/swift-docker/tree/master/swift-ci).
@@ -104,7 +104,7 @@ USER build-user
 
 WORKDIR /home/build-user
 ```
-More examples here [Dockerfiles](https://github.com/futurejones/swift-arm64/tree/master/swift-ci-docker)
+More examples here - [Dockerfiles](https://github.com/futurejones/swift-arm64/tree/master/swift-ci-docker)
 
 # Step 2 - Building a Docker Image
 * Create a build directory
@@ -117,7 +117,7 @@ cd docker-build
 ```bash
 docker build -f <dockerfile path> . --tag <image-name>
 ```  
-By default docker will look for and build the `Dockerfile` without specifying a file path.
+By default docker will look for and build the `Dockerfile` if you don't specify a file path.
 ```bash
 docker build . --tag ubuntu_20.04
 ```
@@ -168,7 +168,8 @@ swiftarm/ubuntu_focal \
 install_destdir=/home/build-user/swift-install \
 installable_package=/home/build-user/output/swift-ubuntu-focal-master-aarch64.tar.gz'
 ```
-```bash
+Command details:-
+```docker
 docker run \
 --cap-add=SYS_PTRACE \
 --security-opt seccomp=unconfined \
