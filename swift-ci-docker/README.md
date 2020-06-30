@@ -196,11 +196,11 @@ We should now have the `swift installable package` in the `output` directory tha
 
 # Building for Other Linux Distributions.
 You can now build `swift` the following Linux distributions using docker containers.
-* Ubuntu 16.04
-* Ubuntu 18.04
-* Ubuntu 20.04
-* Debian 10
-* Amazon Linux 2
-* CentOS 8
+* [Ubuntu 16.04](https://hub.docker.com/r/swiftarm/ubuntu_xenial)
+* [Ubuntu 18.04](https://hub.docker.com/r/swiftarm/ubuntu_bionic)
+* [Ubuntu 20.04](https://hub.docker.com/r/swiftarm/ubuntu_focal)
+* [Debian 10](https://hub.docker.com/r/swiftarm/debian_10)
+* [Amazon Linux 2](https://hub.docker.com/r/swiftarm/amzn_2)
+* [CentOS 8](https://hub.docker.com/r/swiftarm/centos_8)
 
-Other distributions may also be possible but haven't been tested.
+Other distributions may also be possible but they haven't been tested yet.
