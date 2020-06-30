@@ -114,7 +114,9 @@ cd docker-build
 ```
 * In the build directory create a file called `Dockerfile` and copy paste the example code from above.
 * Run the following docker build command.  
-`docker build -f <dockerfile path> . --tag <image-name>`  
+```bash
+docker build -f <dockerfile path> . --tag <image-name>
+```  
 By default docker will look for and build the `Dockerfile` without specifying a file path.
 ```bash
 docker build . --tag ubuntu_20.04
@@ -190,7 +192,9 @@ As the installable package is still inside the docker container we will need to 
 ```bash
 docker cp swift-ubuntu-focal:/home/build-user/output/swift-ubuntu-focal-master-aarch64.tar.gz output/
 ```
-`docker cp <container name>:<absolute path to file> <destination directory>/`
+```bash
+docker cp <container name>:<absolute path to file> <destination directory>/
+```
 
 We should now have the `swift installable package` in the `output` directory that we created earlier.
 
