@@ -7,9 +7,11 @@ RUN groupadd -g 998 build-user && \
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
-RUN apt-get update
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-RUN apt-get -y install \
+RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
+
+RUN apt-get update && apt-get -y install \
     wget \
     build-essential \
     clang \
@@ -33,8 +35,6 @@ RUN apt-get -y install \
     python-dev \
     python-six \
     python3 \
-    python3-dev \
-    python3-six \
     rsync \
     swig \
     systemtap-sdt-dev \
