@@ -1,0 +1,89 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index b924eac5c74..868883f66c9 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -733,35 +733,35 @@ mixin-preset=
+     mixin_lightweight_assertions
+     mixin_linux_install_components_with_clang
+ 
+-llbuild
+-swiftpm
+-xctest
+-libicu
+-libcxx
++#llbuild
++#swiftpm
++#xctest
++#libicu
++#libcxx
+ 
+ dash-dash
+ 
+ build-ninja
+ install-swift
+-install-lldb
+-install-llbuild
+-install-swiftpm
+-install-xctest
+-install-libicu
++#install-lldb
++#install-llbuild
++#install-swiftpm
++#install-xctest
++#install-libicu
+ install-prefix=/usr
+-install-libcxx
+-install-sourcekit-lsp
++#install-libcxx
++#install-sourcekit-lsp
+ build-swift-static-stdlib
+ build-swift-static-sdk-overlay
+-build-swift-stdlib-unittest-extra
++#build-swift-stdlib-unittest-extra
+ 
+ # Executes the lit tests for the installable package that is created
+ # Assumes the swift-integration-tests repo is checked out
+ 
+-test-installable-package
++#test-installable-package
+ 
+ # Build the benchmarks against the toolchain.
+-toolchain-benchmarks
++#toolchain-benchmarks
+ 
+ # Path to the root of the installation filesystem.
+ install-destdir=%(install_destdir)s
+@@ -772,23 +772,23 @@ installable-package=%(installable_package)s
+ [preset: buildbot_linux]
+ mixin-preset=mixin_linux_installation
+ build-subdir=buildbot_linux
+-lldb
++#lldb
+ release
+-test
+-validation-test
+-long-test
+-stress-test
+-test-optimized
++#test
++#validation-test
++#long-test
++#stress-test
++#test-optimized
+ foundation
+ libdispatch
+-indexstore-db
+-sourcekit-lsp
+-lit-args=-v --time-tests
++#indexstore-db
++#sourcekit-lsp
++#lit-args=-v --time-tests
+ 
+ dash-dash
+ 
+ # rdar://problem/31454823
+-lldb-test-swift-only
++#lldb-test-swift-only
+ 
+ install-foundation
+ install-libdispatch
