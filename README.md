@@ -2,7 +2,7 @@
 ## Latest build info from our CI server
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
 
-### Swift 5.2.4 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.4-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.4-ubuntu-18.04/)
+### Swift 5.2.5 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/)
 ### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/)&nbsp;&nbsp;&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=amazon-linux&status=2&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
@@ -31,9 +31,9 @@ Install Swift 5.-.-
 ```bash
 $ sudo apt-get install swift5
 ```  
-NOTE: From Swift version 5.2.4 onwards the install package will be named `swift-lang`
+NOTE: From Swift version 5.2.5 onwards the install package will be named `swiftlang`
 ```bash
-$ sudo apt-get install swift-lang
+$ sudo apt-get install swiftlang
 ```  
 ### Tested Servers
 *c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
