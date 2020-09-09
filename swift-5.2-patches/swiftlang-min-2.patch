@@ -9,7 +9,7 @@ index b924eac5c74..d60e5577d49 100644
 +#===------------------------------------------------------------------------===#
 +# Linux swiftlang-min
 +#===------------------------------------------------------------------------===#
-+[preset: buildbot_linux, swiftlang-min]
++[preset: buildbot_linux,swiftlang-min]
 +assertions
 +no-swift-stdlib-assertions
 +swift-enable-ast-verifier=0
