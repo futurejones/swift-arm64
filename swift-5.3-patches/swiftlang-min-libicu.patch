@@ -1,0 +1,46 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index b924eac5c74..d536bf53d22 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -10,6 +10,41 @@
+ #
+ #===------------------------------------------------------------------------===#
+ 
++#===------------------------------------------------------------------------===#
++# Linux swiftlang-min
++#===------------------------------------------------------------------------===#
++[preset: buildbot_linux, swiftlang-min]
++assertions
++no-swift-stdlib-assertions
++swift-enable-ast-verifier=0
++
++swift-install-components=autolink-driver;compiler;clang-resource-dir-symlink;stdlib;swift-remote-mirror;sdk-overlay;parser-lib;license
++llvm-install-components=llvm-cov;llvm-profdata;clang;clang-resource-headers;compiler-rt;clangd
++
++build-ninja
++release
++
++install-prefix=/usr
++build-subdir=buildbot_linux
++install-destdir=%(install_destdir)s
++installable-package=%(installable_package)s
++
++build-swift-static-stdlib
++build-swift-static-sdk-overlay
++
++foundation
++libdispatch
++libicu
++
++install-swift
++install-foundation
++install-libdispatch
++install-libicu
++reconfigure
++#===------------------------------------------------------------------------===#
++# End
++#===------------------------------------------------------------------------===#
++
+ #===------------------------------------------------------------------------===#
+ # Buildbots for Darwin OSes
+ #===------------------------------------------------------------------------===#
