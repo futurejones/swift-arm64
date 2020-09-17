@@ -3,13 +3,12 @@
 The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
 
 ### Swift 5.2.5 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/)
-### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3-ubuntu-18.04/)
+### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/)&nbsp;&nbsp;&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=amazon-linux&status=2&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=centos&status=8&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=debian&status=10&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=fedora&status=32&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=16.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=18.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=20.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 
