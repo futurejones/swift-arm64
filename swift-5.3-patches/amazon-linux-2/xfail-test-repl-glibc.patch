@@ -1,0 +1,11 @@
+diff --git a/repl/test-repl-glibc.py b/repl/test-repl-glibc.py
+index 15fdcb2..81787de 100644
+--- a/repl/test-repl-glibc.py
++++ b/repl/test-repl-glibc.py
+@@ -1,5 +1,6 @@
+ # Tests that importing Glibc works on Linux
+ #
++# XFAIL: linux
+ # REQUIRES: platform=Linux
+ # REQUIRES: have-pexpect
+ #
