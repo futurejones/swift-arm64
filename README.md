@@ -50,7 +50,7 @@ An official 64 bit Ubuntu install image is now available for Raspberry Pi 2/3/4.
 ### Ubuntu Focal 20.04 now available for Raspberry Pi  
 Download image here - https://ubuntu.com/download/raspberry-pi  
 
-Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/app/swift-arm/release)
+Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/swift-arm/release)
 
 ## Swift 5.3 Developer Snapshots
 Swift 5.3 developer snapshots are now available for Ubuntu 16.04 / 1804.  
