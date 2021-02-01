@@ -6,9 +6,7 @@ The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.
 ### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/)
 ### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/)&nbsp;&nbsp;&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=amazon-linux&status=2&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=centos&status=8&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=debian&status=10&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=fedora&status=32&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=18.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=20.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/tag/master-dev-snapshots)&nbsp;
 
@@ -36,25 +34,21 @@ $ sudo apt-get install swiftlang
 ```  
 ### Tested Servers
 *c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
-*Amazon EC2 A1 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
+*Amazon EC2 Arm64 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
 *Rock64 / RockPro64* - Debian/Stretch Ubuntu/Xenial - [http://pine64.org](http://pine64.org)  
-*RaspberryPi 3 / 4 models* - Ubuntu 18.04 64bit  
+*RaspberryPi 3 / 4 models* - Ubuntu 18.04 / 20.04 / 20.10 64bit  
 *ODROID-C2* - Ubuntu 16.04.4 LTS xenial
 
 ### RaspberyPi 3 / 4 64bit OS
 
 An official 64 bit Ubuntu install image is now available for Raspberry Pi 2/3/4.
 
-### Ubuntu Focal 20.04 now available for Raspberry Pi  
+### Ubuntu Focal 20.10 now available for Raspberry Pi  
 Download image here - https://ubuntu.com/download/raspberry-pi  
 
-Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 is available here - [Swift-Arm Community Releases](https://packagecloud.io/swift-arm/release)
-
-## Swift 5.3 Developer Snapshots
-Swift 5.3 developer snapshots are now available for Ubuntu 16.04 / 1804.  
-Download here - [Snapshots](https://github.com/futurejones/swift-arm64/releases/tag/v5.3-dev-snapshot)
+Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 / 20.10 is available here - [Swift-Arm Community Releases](https://packagecloud.io/swift-arm/release)
 
 ## Building Swift With Docker
 You can now build Swift for multiple OS releases all from the same build server using Docker containers. - [Build with Docker](https://github.com/futurejones/swift-arm64/blob/master/swift-ci-docker/README.md)
