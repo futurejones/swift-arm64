@@ -21,7 +21,7 @@ public func printToday(){
     dateFormatter.timeStyle = .full
 
     let dateString = dateFormatter.string(from: date as Date)
-    print("  Welcome to Swift version 5.3.2")
+    print("  Welcome to Swift version 5.3.3")
     print("Today is \(dateString)")
 
 }
