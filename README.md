@@ -1,6 +1,12 @@
 # Swift for Arm64/AArch64 Servers and SBC's
 ## Latest build info from our CI server
-The awesome Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
+Thanks to the great support from the [Works on Arm](https://www.worksonarm.com/) project we have received an awesome update to our CI Server!
+The Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  who are now [Equinox Metal](https://metal.equinix.com/) has been upgraded to the latest [Ampere Altra](https://amperecomputing.com/altra/) server.  
+* 80 cpu cores @ 3.0GHz
+* 256GB sdram
+* 960GB NVME SSD  
+
+We are seeing about a massive increase in overall performance and a huge reduction in build times.
 
 ### Swift 5.2.5 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/)
 ### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/)
@@ -33,7 +39,8 @@ NOTE: From Swift version 5.2.5 onwards the install package will be named `swiftl
 $ sudo apt-get install swiftlang
 ```  
 ### Tested Servers
-*c1-large-arm from Packet* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
+*Ampere Altra Mt Snow* - [Equinox Metal](https://metal.equinix.com/)
+*Cavium ThunderX* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
 *Amazon EC2 Arm64 instances* - [AWS](https://aws.amazon.com/ec2/instance-types/a1/)
 ### Tested Boards and OS's
 
