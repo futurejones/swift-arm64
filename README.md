@@ -6,7 +6,7 @@ The Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/clou
 * 256GB sdram
 * 960GB NVME SSD  
 
-We are seeing about a massive increase in overall performance and a huge reduction in build times.
+We are seeing a massive increase in overall performance and a huge reduction in build times.
 
 ### Swift 5.2.5 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/)
 ### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/)
