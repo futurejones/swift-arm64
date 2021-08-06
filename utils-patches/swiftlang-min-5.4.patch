@@ -1,8 +1,8 @@
 diff --git a/utils/build-presets.ini b/utils/build-presets.ini
-index 5d5b45c6413..0cd75e7242e 100644
+index 5d5b45c6413..aa923302832 100644
 --- a/utils/build-presets.ini
 +++ b/utils/build-presets.ini
-@@ -10,6 +10,45 @@
+@@ -10,6 +10,47 @@
  #
  #===------------------------------------------------------------------------===#
  
@@ -24,6 +24,8 @@ index 5d5b45c6413..0cd75e7242e 100644
 +build-subdir=buildbot_linux
 +install-destdir=%(install_destdir)s
 +installable-package=%(installable_package)s
++
++relocate-xdg-cache-home-under-build-subdir
 +
 +build-swift-static-stdlib
 +build-swift-static-sdk-overlay
