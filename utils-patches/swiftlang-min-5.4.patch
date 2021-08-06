@@ -31,11 +31,13 @@ index b924eac5c74..d536bf53d22 100644
 +foundation
 +libdispatch
 +libicu
++libcxx
 +
 +install-swift
 +install-foundation
 +install-libdispatch
 +install-libicu
++install-libcxx
 +reconfigure
 +#===------------------------------------------------------------------------===#
 +# End
