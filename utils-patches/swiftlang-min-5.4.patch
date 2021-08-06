@@ -1,8 +1,8 @@
 diff --git a/utils/build-presets.ini b/utils/build-presets.ini
-index 5d5b45c6413..d50c5b9b156 100644
+index 5d5b45c6413..0cd75e7242e 100644
 --- a/utils/build-presets.ini
 +++ b/utils/build-presets.ini
-@@ -10,6 +10,44 @@
+@@ -10,6 +10,45 @@
  #
  #===------------------------------------------------------------------------===#
  
@@ -32,13 +32,14 @@ index 5d5b45c6413..d50c5b9b156 100644
 +libdispatch
 +libicu
 +libcxx
++swift-driver
 +
 +install-swift
 +install-foundation
 +install-libdispatch
 +install-libicu
 +install-libcxx
-+
++install-swift-driver
 +reconfigure
 +#===------------------------------------------------------------------------===#
 +# End
