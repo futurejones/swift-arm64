@@ -1,0 +1,22 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index b9cc7759123..1d258e6696a 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -786,7 +786,7 @@ llbuild
+ swiftpm
+ swift-driver
+ xctest
+-libicu
++skip-build-libicu
+ libcxx
+ 
+ build-ninja
+@@ -797,7 +797,7 @@ install-llbuild
+ install-swiftpm
+ install-swift-driver
+ install-xctest
+-install-libicu
++
+ install-prefix=/usr
+ install-libcxx
+ install-sourcekit-lsp
