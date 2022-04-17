@@ -26,25 +26,23 @@ release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://
 # Swift-Arm64
 Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
 
-Install packages are now available for arm64/aarch64 compatible Servers and SBC's.
-
-for Ubuntu/Debian/Stretch
+## [The Swift Community Apt Repository](https://swiftlang.xyz)
+Install packages are now available for arm64/aarch64 compatible Servers and SBC's for Ubuntu and Debian based OS's in the
+new [Swift Community Apt Repository](https://swiftlang.xyz)
 
 Add repo -
 
 ```bash
-$ curl -s https://packagecloud.io/install/repositories/swift-arm/release/script.deb.sh | sudo bash
+$ curl -s https://archive.swiftlang.xyz/install.sh | sudo bash
 ``` 
 
-Install Swift 5.-.- 
+Install Swift
 
-```bash
-$ sudo apt-get install swift5
-```  
-NOTE: From Swift version 5.2.5 onwards the install package will be named `swiftlang`
 ```bash
 $ sudo apt-get install swiftlang
 ```  
+For more information about the repository please see the [User Guide](https://www.swiftlang.xyz/user-guide)
+
 ### Tested Servers
 *Ampere Altra Mt Snow* - [Equinox Metal](https://metal.equinix.com/)  
 *Cavium ThunderX* - [Packet Bare Metal Servers](https://www.packet.com/cloud/servers/c1-large-arm/)  
@@ -59,10 +57,9 @@ $ sudo apt-get install swiftlang
 
 An official 64 bit Ubuntu install image is now available for Raspberry Pi 2/3/4.
 
-### Ubuntu Focal 20.10 now available for Raspberry Pi  
-Download image here - https://ubuntu.com/download/raspberry-pi  
+### Ubuntu Focal available for Raspberry Pi  
+Download images here - https://ubuntu.com/download/raspberry-pi  
 
-Swift 5 AArch64 for Ubuntu 18.04 / 19.04 / 20.04 / 20.10 is available here - [Swift-Arm Community Releases](https://packagecloud.io/swift-arm/release)
 
 ## Building Swift With Docker
 You can now build Swift for multiple OS releases all from the same build server using Docker containers. - [Build with Docker](https://github.com/futurejones/swift-arm64/blob/master/swift-ci-docker/README.md)
