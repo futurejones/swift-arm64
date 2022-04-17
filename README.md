@@ -22,6 +22,9 @@ release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-hirsute/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-hirsute/)  
 release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-hirsute/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-hirsute/)
 
+### Ubuntu 20.04 Focal  
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-focal/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-focal/)  
+release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-focal/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-focal/)
 
 # Swift-Arm64
 Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
