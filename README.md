@@ -8,13 +8,20 @@ The Cavium ThunderX from [Packet Bare Metal Servers](https://www.packet.com/clou
 
 We are seeing a massive increase in overall performance and a huge reduction in build times.
 
-### Swift 5.2.5 &nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.2.x-ubuntu-18.04/)
-### Swift 5.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-5.3.x-ubuntu-18.04/)
-### Master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2020.04/job/swift-master-ubuntu-20.04/badge/icon)](http://futurejones.xyz:8080/view/Ubuntu%2020.04/job/swift-master-ubuntu-20.04/)&nbsp;&nbsp;&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=amazon-linux&status=2&color=orange)](https://github.com/futurejones/swift-arm64/releases/)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=debian&status=10&color=orange)](https://github.com/futurejones/swift-arm64/releases/)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=18.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/)&nbsp;
-[![Build Status](http://futurejones.xyz:8080/view/Ubuntu%2018.04/job/swift-master-ubuntu-18.04/badge/icon?subject=ubuntu&status=20.04&color=orange)](https://github.com/futurejones/swift-arm64/releases/)&nbsp;
+## [The Swift Arm Community CI Server](https://ci.swiftlang.xyz)
+
+### Debian 11 Bullseye  
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/)  
+release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-debian-bullseye/)
+
+### Ubuntu 22.04 Jammy  
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/)  
+release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-jammy/)
+
+### Ubuntu 21.04 Hirsute  
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-hirsute/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-hirsute/)  
+release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-hirsute/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-hirsute/)
+
 
 # Swift-Arm64
 Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
