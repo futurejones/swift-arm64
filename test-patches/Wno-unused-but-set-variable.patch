@@ -1,0 +1,13 @@
+diff --git a/test/lit.cfg b/test/lit.cfg
+index d0934150432..487d0a8ab4e 100644
+--- a/test/lit.cfg
++++ b/test/lit.cfg
+@@ -571,6 +571,8 @@ config.substitutions.append( ('%clang',
+ extraCheckWarningFlags = (
+   # Turn on all warnings and promote them to errors
+   '-Weverything -Werror '
++  # error: variable 'spins' set but not used [-Werror,-Wunused-but-set-variable]
++  '-Wno-unused-but-set-variable'
+   # Don't warn about unused macros in our clang header.
+   '-Wno-unused-macros '
+   # Don't warn about module imports used at #includes.
