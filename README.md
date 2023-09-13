@@ -12,18 +12,18 @@ We are seeing a massive increase in overall performance and a huge reduction in 
 
 ### Debian 11 Bullseye  
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/)  
-release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-debian-bullseye/)  
-release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-debian-bullseye/)
+release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-debian-bullseye/)  
+release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-debian-bullseye/)
+
+### Debian 12 Bookworm 
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/)  
+release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-debian-bookworm/)  
+release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-debian-bookworm/)
 
 ### Ubuntu 22.04 Jammy  
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/)  
-release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-jammy/)  
-release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-jammy/)
-
-### Ubuntu 20.04 Focal  
-main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-focal/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-focal/)  
-release/5.7 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-focal/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.7-ubuntu-focal/)  
-release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-focal/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-focal/)
+release/5.8 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.8-ubuntu-jammy/)  
+release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-ubuntu-jammy/)
 
 # Swift-Arm64
 Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
