@@ -1,0 +1,13 @@
+diff --git a/lib/target.py b/lib/target.py
+index d1db48b1..44fd41da 100644
+--- a/lib/target.py
++++ b/lib/target.py
+@@ -342,7 +342,7 @@ class Target:
+         if "linux" in triple:
+             self.sdk = OSType.Linux
+             self.dynamic_library_suffix = ".so"
+-            self.linker = "gold"
++            self.linker = "lld"
+         elif "freebsd" in triple:
+             self.sdk = OSType.FreeBSD
+             self.dynamic_library_suffix = ".so"

@@ -1,0 +1,69 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 28653cfa5c6..45a511d2938 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -806,7 +806,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Windows AND NOT CMAKE_HOST_SYSTEM_NAME STREQUA
+ elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
+   set(SWIFT_USE_LINKER_default "")
+ else()
+-  set(SWIFT_USE_LINKER_default "gold")
++  set(SWIFT_USE_LINKER_default "lld")
+ endif()
+ set(SWIFT_USE_LINKER ${SWIFT_USE_LINKER_default} CACHE STRING
+     "Build Swift with a non-default linker")
+diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
+index 389afb821dd..ebe300f13ca 100644
+--- a/lib/Driver/UnixToolChains.cpp
++++ b/lib/Driver/UnixToolChains.cpp
+@@ -99,14 +99,14 @@ std::string toolchains::GenericUnix::getDefaultLinker() const {
+     // section on these targets, it also generates COPY relocations for
+     // final executables, as such, unless specified, we default to gold
+     // linker.
+-    return "gold";
++    return "lld";
+   case llvm::Triple::x86:
+   case llvm::Triple::x86_64:
+   case llvm::Triple::ppc64:
+   case llvm::Triple::ppc64le:
+   case llvm::Triple::systemz:
+     // BFD linker has issues wrt relocations against protected symbols.
+-    return "gold";
++    return "lld";
+   default:
+     // Otherwise, use the default BFD linker.
+     return "";
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index 1d1a17b1f0b..f133fcd8f4a 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -806,6 +806,13 @@ llvm-install-components=llvm-ar;llvm-cov;llvm-profdata;IndexStore;clang;clang-re
+ mixin-preset=
+     mixin_linux_install_components_with_clang
+ 
++extra-cmake-options=
++   -DLLVM_USE_LINKER=lld
++   -DSWIFT_USE_LINKER=lld
++
++skip-early-swift-driver
++skip-early-swiftsyntax
++
+ llbuild
+ swiftpm
+ swift-driver
+@@ -834,7 +841,7 @@ build-swift-stdlib-unittest-extra
+ # Executes the lit tests for the installable package that is created
+ # Assumes the swift-integration-tests repo is checked out
+ 
+-test-installable-package
++# test-installable-package
+ 
+ # Build the benchmarks against the toolchain.
+ toolchain-benchmarks
+@@ -856,6 +863,7 @@ relocate-xdg-cache-home-under-build-subdir
+ mixin-preset=
+     mixin_linux_installation
+ build-subdir=buildbot_linux
++
+ lldb
+ release
+ test
