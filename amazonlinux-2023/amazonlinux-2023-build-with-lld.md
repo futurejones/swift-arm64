@@ -92,6 +92,7 @@ swift/utils/update-checkout --tag swift-5.9.2-RELEASE
    bootstrapping=off
    ####
    ```
+**Patches** for Swift versions 5.8 and 5.9 are available here - [patches](https://github.com/futurejones/swift-arm64/tree/master/amazonlinux-2023/patches)
 
 ## Build Swift using Buildbot Preset
 
