@@ -77,6 +77,7 @@ swift/utils/update-checkout --tag swift-5.9.2-RELEASE
 #### Modify buildbot preset
 
 1. https://github.com/apple/swift/blob/main/utils/build-presets.ini#L809
+
    Add the following to **[preset: mixin_linux_installation]** after the line - `mixin_linux_install_components_with_clang`
 
    ```ini
@@ -94,7 +95,9 @@ swift/utils/update-checkout --tag swift-5.9.2-RELEASE
 
 ## Build Swift using Buildbot Preset
 
-`swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.9-amazonlinux2023.tar.gz`
+```
+swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.9-amazonlinux2023.tar.gz
+```
 
 ## Dependencies Needed for Swift Installation
 
