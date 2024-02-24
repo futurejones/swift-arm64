@@ -98,15 +98,23 @@ swift/utils/update-checkout --tag swift-5.8.1-RELEASE
 ## Build Swift using Buildbot Preset
 
 ```
-swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.9-amazonlinux2023.tar.gz
+# change version number as needed
+swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.8.1-amazonlinux2023.tar.gz
 ```
 
 ## Bootstrapping swift 5.9 with swift 5.8
 
 Once the swift 5.8. toolchain has been built it can be used to bootstrap the swift 5.9 build.
 
-To do this we will need to patch the `AddSwift.cmake` file because of changes to `lld-13`.
-Use this patch `nostart-stop-gc-5.9.patch`
+To do this we will need to patch the `AddSwift.cmake` file because of changes to `lld-13`.  
+Use this patch [`nostart-stop-gc-5.9.patch`](https://github.com/futurejones/swift-arm64/blob/master/amazonlinux-2023/patches/swift-5.9/nostart-stop-gc-5.9.patch)
+
+In the `buildbot` preset you will no longer need the following lines.  
+
+~~skip-early-swift-driver~~  
+~~skip-early-swiftsyntax~~  
+~~bootstrapping=off~~
+
 
 ## Dependencies Needed for Swift Installation
 
