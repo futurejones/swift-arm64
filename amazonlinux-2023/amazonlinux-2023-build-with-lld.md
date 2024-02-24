@@ -56,13 +56,13 @@ swift/utils/update-checkout --clone
 #### Branch
 
 ```
-swift/utils/update-checkout --scheme release/5.9
+swift/utils/update-checkout --scheme release/5.8
 ```
 
 #### Tag
 
 ```
-swift/utils/update-checkout --tag swift-5.9.2-RELEASE
+swift/utils/update-checkout --tag swift-5.8.1-RELEASE
 ```
 
 ## Apply Patches
@@ -92,13 +92,21 @@ swift/utils/update-checkout --tag swift-5.9.2-RELEASE
    bootstrapping=off
    ####
    ```
-**Patches** for Swift versions 5.8 and 5.9 are available here - [patches](https://github.com/futurejones/swift-arm64/tree/master/amazonlinux-2023/patches)
+
+   **Patches** for Swift versions 5.8 and 5.9 are available here - [patches](https://github.com/futurejones/swift-arm64/tree/master/amazonlinux-2023/patches)
 
 ## Build Swift using Buildbot Preset
 
 ```
 swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.9-amazonlinux2023.tar.gz
 ```
+
+## Bootstrapping swift 5.9 with swift 5.8
+
+Once the swift 5.8. toolchain has been built it can be used to bootstrap the swift 5.9 build.
+
+To do this we will need to patch the `AddSwift.cmake` file because of changes to `lld-13`.
+Use this patch `nostart-stop-gc-5.9.patch`
 
 ## Dependencies Needed for Swift Installation
 
