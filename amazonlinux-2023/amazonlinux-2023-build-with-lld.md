@@ -1,6 +1,10 @@
 # How to Build Swift for Amazon Linux 2023 using LLD Linker
 
 ## Install Swift build dependencies
+*** **NOTE:** ***  
+If you are bootstrapping a `swift-5.9.*` build with the `swift-5.8.*` toolchain DO NOT install the system `clang` or `lld` versions!
+
+
 
 ```sh
 sudo yum -y install \
