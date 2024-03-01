@@ -1,8 +1,18 @@
 diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
-index 61498c144a2..af8e9ed89ca 100644
+index 61498c144a2..ee9888ab91b 100644
 --- a/lib/Driver/UnixToolChains.cpp
 +++ b/lib/Driver/UnixToolChains.cpp
-@@ -113,6 +113,10 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
+@@ -10,6 +10,9 @@
+ //
+ //===----------------------------------------------------------------------===//
+ 
++#include <iostream>
++#include <llvm/ADT/Triple.h>
++
+ #include "ToolChains.h"
+ 
+ #include "swift/Basic/Dwarf.h"
+@@ -113,6 +116,10 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
  std::string toolchains::GenericUnix::getDefaultLinker() const {
    if (getTriple().isAndroid())
      return "lld";
