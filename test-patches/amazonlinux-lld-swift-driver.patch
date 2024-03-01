@@ -1,0 +1,28 @@
+diff --git a/Sources/SwiftDriver/Jobs/GenericUnixToolchain+LinkerSupport.swift b/Sources/SwiftDriver/Jobs/GenericUnixToolchain+LinkerSupport.swift
+index 1fcf6f36..7d1c5b47 100644
+--- a/Sources/SwiftDriver/Jobs/GenericUnixToolchain+LinkerSupport.swift
++++ b/Sources/SwiftDriver/Jobs/GenericUnixToolchain+LinkerSupport.swift
+@@ -21,6 +21,10 @@ extension GenericUnixToolchain {
+         targetTriple.environment == .android {
+       return "lld"
+     }
++    print(targetTriple.platformName())
++    print(targetTriple.platformName())
++    print(targetTriple.platformName())
++    print(targetTriple.platformName())
+ 
+     switch targetTriple.arch {
+     case .arm, .aarch64, .armeb, .thumb, .thumbeb:
+@@ -28,10 +32,10 @@ extension GenericUnixToolchain {
+       // section on these targets, it also generates COPY relocations for
+       // final executables, as such, unless specified, we default to gold
+       // linker.
+-      return "gold"
++      return "lld"
+     case .x86, .x86_64, .ppc64, .ppc64le, .systemz:
+       // BFD linker has issues wrt relocations against protected symbols.
+-      return "gold"
++      return "lld"
+     default:
+       // Otherwise, use the default BFD linker.
+       return ""
