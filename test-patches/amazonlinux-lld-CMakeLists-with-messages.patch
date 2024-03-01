@@ -1,0 +1,46 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2eeaf61e374..76594d0bc4f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -888,6 +888,32 @@ endif()
+ # Which default linker to use. Prefer LLVM_USE_LINKER if it set, otherwise use
+ # our own defaults. This should only be possible in a unified (not stand alone)
+ # build environment.
++
++# Check if Amazon Linux is being used.
++cmake_host_system_information(RESULT DISTRO_ID  QUERY DISTRIB_ID)
++message(STATUS "We are using Amazon Linux (DISTRO_ID: ${DISTRO_ID}) so set default linker to lld")
++
++# I'm printing a bunch of stuff in an attempt to figure out if I can recognize building on a Raspberry Pi and only run the POST_BUILD command on the Pi.
++message(STATUS "CMAKE_INSTALL_PREFIX=`${CMAKE_INSTALL_PREFIX}`")
++cmake_host_system_information(RESULT MY_OS_NAME QUERY OS_NAME)
++message(STATUS "OS_NAME=`${MY_OS_NAME}`")
++cmake_host_system_information(RESULT MY_OS_RELEASE QUERY OS_RELEASE)
++message(STATUS "OS_RELEASE=`${MY_OS_RELEASE}`")
++cmake_host_system_information(RESULT MY_OS_VERSION QUERY OS_VERSION)
++message(STATUS "OS_VERSION=`${MY_OS_VERSION}`")
++cmake_host_system_information(RESULT MY_OS_PLATFORM QUERY OS_PLATFORM)
++message(STATUS "OS_PLATFORM=`${MY_OS_PLATFORM}`")
++cmake_host_system_information(RESULT MY_PROCESSOR_DESCRIPTION QUERY PROCESSOR_DESCRIPTION)
++message(STATUS "PROCESSOR_DESCRIPTION=`${MY_PROCESSOR_DESCRIPTION}`")
++if (CMAKE_VERSION VERSION_GREATER 3.22)
++    cmake_host_system_information(RESULT PRETTY_NAME QUERY DISTRIB_PRETTY_NAME)
++    message(STATUS "${PRETTY_NAME}")
++    cmake_host_system_information(RESULT DISTRO QUERY DISTRIB_INFO)
++    foreach(VAR IN LISTS DISTRO)
++        message(STATUS "${VAR}=`${${VAR}}`")
++    endforeach()
++endif()
++
+ if(LLVM_USE_LINKER)
+   set(SWIFT_USE_LINKER_default "${LLVM_USE_LINKER}")
+ elseif(SWIFT_HOST_VARIANT_SDK STREQUAL "ANDROID")
+@@ -897,7 +923,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_HOST_SYSTEM_NAME STREQ
+ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+   set(SWIFT_USE_LINKER_default "")
+ else()
+-  set(SWIFT_USE_LINKER_default "gold")
++  set(SWIFT_USE_LINKER_default "lld")
+ endif()
+ set(SWIFT_USE_LINKER ${SWIFT_USE_LINKER_default} CACHE STRING
+     "Build Swift with a non-default linker")
