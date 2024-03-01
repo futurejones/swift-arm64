@@ -1,0 +1,16 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2eeaf61e374..4247de3d43f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -888,6 +888,11 @@ endif()
+ # Which default linker to use. Prefer LLVM_USE_LINKER if it set, otherwise use
+ # our own defaults. This should only be possible in a unified (not stand alone)
+ # build environment.
++
++# Check if Amazon Linux is being used.
++cmake_host_system_information(RESULT DISTRO_ID  QUERY DISTRIB_ID)
++message(STATUS "We are using Amazon Linux (DISTRO_ID: ${DISTRO_ID}) so set default linker to lld")
++
+ if(LLVM_USE_LINKER)
+   set(SWIFT_USE_LINKER_default "${LLVM_USE_LINKER}")
+ elseif(SWIFT_HOST_VARIANT_SDK STREQUAL "ANDROID")
