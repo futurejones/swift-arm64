@@ -1,5 +1,5 @@
 diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
-index 61498c144a2..ee9888ab91b 100644
+index 61498c144a2..5c373c05ba3 100644
 --- a/lib/Driver/UnixToolChains.cpp
 +++ b/lib/Driver/UnixToolChains.cpp
 @@ -10,6 +10,9 @@
@@ -12,14 +12,15 @@ index 61498c144a2..ee9888ab91b 100644
  #include "ToolChains.h"
  
  #include "swift/Basic/Dwarf.h"
-@@ -113,6 +116,10 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
+@@ -113,6 +116,11 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
  std::string toolchains::GenericUnix::getDefaultLinker() const {
    if (getTriple().isAndroid())
      return "lld";
 +  // Check for Amazon Linux and default to lld
-+  if (getTriple().getVendorName() == "amazon")
++  if (getTriple().getVendorName() == "amazon") {
 +    std::cout << "We are using Amazon Linux so default to lld\n";
 +    return "lld";
++  }
  
    switch (getTriple().getArch()) {
    case llvm::Triple::arm:
