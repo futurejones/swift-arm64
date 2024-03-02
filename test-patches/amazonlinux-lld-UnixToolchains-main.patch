@@ -1,0 +1,34 @@
+diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
+index f6856c17e16..d1740f5a4a0 100644
+--- a/lib/Driver/UnixToolChains.cpp
++++ b/lib/Driver/UnixToolChains.cpp
+@@ -9,6 +9,8 @@
+ // See https://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+ //
+ //===----------------------------------------------------------------------===//
++#include <iostream>
++#include <fstream>
+ 
+ #include "ToolChains.h"
+ 
+@@ -110,6 +112,20 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
+ }
+ 
+ std::string toolchains::GenericUnix::getDefaultLinker() const {
++  if (getTriple().isOSLinux()) {
++    std::ifstream file("/etc/os-release");
++    std::string line;
++
++    while (std::getline(file, line)) {
++      if (line.substr(0, 3) == "ID=") {
++        if (line.substr(3) == "\"amzn\"") {
++          file.close();
++          return "lld";
++        }
++      }
++    }
++  }
++
+   if (getTriple().isAndroid())
+     return "lld";
+ 
