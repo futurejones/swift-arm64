@@ -1,0 +1,39 @@
+diff --git a/lib/Driver/UnixToolChains.cpp b/lib/Driver/UnixToolChains.cpp
+index f6856c17e16..f9162d82c07 100644
+--- a/lib/Driver/UnixToolChains.cpp
++++ b/lib/Driver/UnixToolChains.cpp
+@@ -9,6 +9,8 @@
+ // See https://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+ //
+ //===----------------------------------------------------------------------===//
++#include <iostream>
++#include <fstream>
+ 
+ #include "ToolChains.h"
+ 
+@@ -109,8 +111,24 @@ ToolChain::InvocationInfo toolchains::GenericUnix::constructInvocation(
+   return II;
+ }
+ 
++bool isAmazonLinux2023Host() {
++      std::ifstream file("/etc/os-release");
++      std::string line;
++
++      while (std::getline(file, line)) {
++        if (line.substr(0, 12) == "PRETTY_NAME=") {
++          if (line.substr(12) == "\"Amazon Linux 2023\"") {
++            file.close();
++            return true;
++          }
++        }
++      }
++      return false;
++    }
++
+ std::string toolchains::GenericUnix::getDefaultLinker() const {
+-  if (getTriple().isAndroid())
++
++  if (getTriple().isAndroid() || isAmazonLinux2023Host())
+     return "lld";
+ 
+   switch (getTriple().getArch()) {
