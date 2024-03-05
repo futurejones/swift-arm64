@@ -1,0 +1,14 @@
+diff --git a/cmake/modules/AddSwift.cmake b/cmake/modules/AddSwift.cmake
+index f4a2cd3017f..b6268005f17 100644
+--- a/cmake/modules/AddSwift.cmake
++++ b/cmake/modules/AddSwift.cmake
+@@ -612,6 +612,9 @@ function(_add_swift_runtime_link_flags target relpath_to_lib_dir bootstrapping)
+         endif()
+       endif()
+     endif()
++    if(SWIFT_HOST_VARIANT_SDK MATCHES "LINUX|ANDROID|OPENBSD|FREEBSD" AND SWIFT_USE_LINKER STREQUAL "lld")
++      target_link_options(${target} PRIVATE "SHELL:-Xlinker -z -Xlinker nostart-stop-gc")
++    endif()
+   endif()
+ 
+   set_property(TARGET ${target} PROPERTY BUILD_WITH_INSTALL_RPATH YES)
