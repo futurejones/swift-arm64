@@ -1,124 +1,128 @@
 # How to Build Swift for Amazon Linux 2023 using LLD Linker
 
-## Install Swift build dependencies
-*** **NOTE:** ***  
-If you are bootstrapping a `swift-5.9.*` build with the `swift-5.8.*` toolchain DO NOT install the system `clang` or `lld` versions!
+#### \*\*\* Updated for swift version 5.10 \*\*\*
 
+## Creating a Swift Bootstrapped Build Environment
 
+#### Install build dependencies
 
 ```sh
-sudo yum -y install \
- clang \
- cmake \
- curl-devel \
- gcc-c++ \
- git \
- glibc-static \
- libbsd-devel \
- libedit-devel \
- libicu-devel \
- libuuid-devel \
- libxml2-devel \
- lld \
- ncurses-devel \
- ninja-build \
- python3-pexpect \
- pkgconfig \
- procps-ng \
- python \
- python3-devel \
- python3-six \
- python3-psutil \
- python3-pkgconfig \
- python3-pip \
- rsync \
- sqlite-devel \
- swig \
- tzdata \
- unzip \
- uuid-devel \
- wget \
- which \
- zip
+dnf install shadow-utils -y
+
+dnf -y group install "development tools"
+
+dnf -y install \
+  curl-devel       \
+  glibc-static     \
+  libbsd-devel     \
+  libedit-devel    \
+  libicu-devel     \
+  libuuid-devel    \
+  libxml2-devel    \
+  ncurses-devel    \
+  pkgconfig        \
+  procps-ng        \
+  python           \
+  python-devel     \
+  python-six       \
+  python3-devel    \
+  python3-pexpect  \
+  python3-pkgconfig \
+  python3-psutil   \
+  rsync            \
+  sqlite-devel     \
+  tzdata           \
+  uuid-devel       \
+  wget             \
+  which
 ```
 
-## Clone Swift
+**\* **NOTE:** \***  
+If you are not bootstrapping with an existing swift toolchain add `clang` and `lld` to the build dependencies.
+
+#### Install swift 5.8.1 toolchain
+
+```sh
+mkdir -p /opt/swift/5.8.1
+wget https://github.com/futurejones/swift-arm64/releases/download/amazon-linux-2023-dev/swiftlang-5.8.1-amazonlinux-2023-release-aarch64-01.tar.gz
+tar -xzf swiftlang-5.8.1-amazonlinux-2023-release-aarch64-01.tar.gz --directory /opt/swift/5.8.1
+rm -rf swiftlang-5.8.1-amazonlinux-2023-release-aarch64-01.tar.gz
+chmod -R o+r /opt/swift/5.8.1/usr/lib/swift
+
+PATH="/opt/swift/5.8.1/usr/bin:${PATH}"
+```
+
+### Clone Swift
 
 ```sh
 mkdir swift-source && cd swift-source
 git clone https://github.com/apple/swift.git swift
 ```
 
-## Clone Supporting Repositories
+### Clone Supporting Repositories
 
 ```
-swift/utils/update-checkout --clone
+swift/utils/update-checkout --clone --tag swift-5.10-RELEASE
 ```
 
-## Checkout Swift Version
+### Apply Patches
 
-#### Branch
+#### patching swift
 
-```
-swift/utils/update-checkout --scheme release/5.8
-```
-
-#### Tag
-
-```
-swift/utils/update-checkout --tag swift-5.8.1-RELEASE
-```
-
-## Apply Patches
-
-#### Replace "gold" with "lld" in the following files
-
-1. https://github.com/apple/swift/blob/main/CMakeLists.txt#L959
-2. https://github.com/apple/swift/blob/main/lib/Driver/UnixToolChains.cpp#L112
-3. https://github.com/apple/swift-corelibs-foundation/blob/main/lib/target.py#L345
-4. https://github.com/apple/swift-driver/blob/main/Sources/SwiftDriver/Jobs/GenericUnixToolchain%2BLinkerSupport.swift#L25
-
-#### Modify buildbot preset
-
-1. https://github.com/apple/swift/blob/main/utils/build-presets.ini#L809
-
-   Add the following to **[preset: mixin_linux_installation]** after the line - `mixin_linux_install_components_with_clang`
-
-   ```ini
-   ####
-   extra-cmake-options=
-      -DLLVM_USE_LINKER=lld
-      -DSWIFT_USE_LINKER=lld
-
-   skip-early-swift-driver
-   skip-early-swiftsyntax
-
-   bootstrapping=off
-   ####
-   ```
-
-   **Patches** for Swift versions 5.8 and 5.9 are available here - [patches](https://github.com/futurejones/swift-arm64/tree/master/amazonlinux-2023/patches)
-
-## Build Swift using Buildbot Preset
-
-```
-# change version number as needed
-swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/tmp installable_package=/tmp/swift-5.8.1-amazonlinux2023.tar.gz
+```sh
+cd swift
+wget https://raw.githubusercontent.com/futurejones/swift-arm64/master/amazonlinux-2023/patches/swift-5.10/72049-5.10.patch"
+git apply 72049-5.10.patch
+wget https://raw.githubusercontent.com/futurejones/swift-arm64/master/amazonlinux-2023/patches/swift-5.10/nostart-stop-gc-5.10.patch
+git apply nostart-stop-gc-5.10.patch
+cd -
 ```
 
-## Bootstrapping swift 5.9 with swift 5.8
+#### patching swift-driver
 
-Once the swift 5.8. toolchain has been built it can be used to bootstrap the swift 5.9 build.
+```sh
+cd swift-driver
+wget https://github.com/apple/swift-driver/pull/1545.patch
+git apply 1545.patch"
+cd -
+```
 
-To do this we will need to patch the `AddSwift.cmake` file because of changes to `lld-13`.  
-Use this patch [`nostart-stop-gc-5.9.patch`](https://github.com/futurejones/swift-arm64/blob/master/amazonlinux-2023/patches/swift-5.9/nostart-stop-gc-5.9.patch)
+#### patching llvm-project
 
-In the `buildbot` preset you will no longer need the following lines.  
+**\* **NOTE:** \***  
+If you building on a `aarch64/arm64` system you will also need the following patch.
 
-~~skip-early-swift-driver~~  
-~~skip-early-swiftsyntax~~  
-~~bootstrapping=off~~
+```sh
+cd llvm-project
+wget https://github.com/apple/llvm-project/pull/8228.patch
+git apply 8228.patch
+cd -
+```
 
+### Build Swift using Buildbot Preset
+
+```
+#
+swift/utils/build-script --preset=buildbot_linux,no_assertions,no_test install_destdir=/home/$USER/install installable_package=/home/$USER/install/swift-5.10-amazonlinux2023.tar.gz
+```
+
+#### Modify buildbot preset for non-bootstrapped build
+
+**\* **NOTE:** \***  
+If you are not bootstrapping with an existing swift toolchain you will need to modify the buildbot preset.  
+Buildbot presets are found in the `swift/utils/build-presets.ini` file.
+
+Add the following to **[preset: mixin_linux_installation]** after the line - `mixin_linux_install_components_with_clang`
+
+```ini
+####
+
+skip-early-swift-driver
+skip-early-swiftsyntax
+
+bootstrapping=off
+####
+```
 
 ## Dependencies Needed for Swift Installation
 
