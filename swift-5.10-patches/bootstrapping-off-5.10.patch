@@ -1,0 +1,16 @@
+diff --git a/utils/build-presets.ini b/utils/build-presets.ini
+index bd591736ec1..888a01a490b 100644
+--- a/utils/build-presets.ini
++++ b/utils/build-presets.ini
+@@ -843,6 +843,11 @@ llvm-install-components=llvm-ar;llvm-cov;llvm-profdata;IndexStore;clang;clang-re
+ mixin-preset=
+     mixin_linux_install_components_with_clang
+ 
++skip-early-swift-driver
++skip-early-swiftsyntax
++
++bootstrapping=off
++
+ llbuild
+ swiftpm
+ swift-driver

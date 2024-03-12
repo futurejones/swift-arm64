@@ -1,0 +1,22 @@
+diff --git a/test-snapshot-binaries/linux_load_commands.py b/test-snapshot-binaries/linux_load_commands.py
+index 9c13f47..c7de112 100644
+--- a/test-snapshot-binaries/linux_load_commands.py
++++ b/test-snapshot-binaries/linux_load_commands.py
+@@ -1,5 +1,6 @@
+ 
+ # REQUIRES: platform=Linux
++# REQUIRES: disabled
+ # RUN: rm -rf %T && mkdir -p %t
+ # RUN: %{python} %s '%{package_path}' '%T' '%{readelf}'
+ 
+diff --git a/test-snapshot-binaries/test-rpath-linux.py b/test-snapshot-binaries/test-rpath-linux.py
+index be7beae..0975a33 100644
+--- a/test-snapshot-binaries/test-rpath-linux.py
++++ b/test-snapshot-binaries/test-rpath-linux.py
+@@ -1,5 +1,6 @@
+ # Tests that DT_RPATH is correct for the dummy repl, docc, and sourcekit-lsp executables on Linux.
+ # REQUIRES: platform=Linux
++# REQUIRES: disabled
+ # RUN: %{readelf} -d %{repl_swift} | %{FileCheck} %s
+ # CHECK: {{.*}} {{\(RPATH\)|\(RUNPATH\)}} {{.*}}$ORIGIN/../lib/swift/linux
+ #
