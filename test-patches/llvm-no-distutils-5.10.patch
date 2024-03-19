@@ -1,0 +1,27 @@
+diff --git a/lldb/bindings/python/prepare_binding_python.py b/lldb/bindings/python/prepare_binding_python.py
+index c04b971e0bfe..27cac3bbe194 100644
+--- a/lldb/bindings/python/prepare_binding_python.py
++++ b/lldb/bindings/python/prepare_binding_python.py
+@@ -9,6 +9,7 @@ Python binding preparation script.
+ # Python modules:
+ from __future__ import print_function
+ 
++import site
+ import logging
+ import os
+ import re
+@@ -366,12 +367,10 @@ def get_python_module_path(options):
+             "Python",
+             "lldb")
+     else:
+-        from distutils.sysconfig import get_python_lib
+-
+         if options.prefix is not None:
+-            module_path = get_python_lib(True, False, options.prefix)
++            module_path = site.getsitepackages([options.prefix])[0]
+         else:
+-            module_path = get_python_lib(True, False)
++            module_path = site.getsitepackages()[0]
+         return os.path.normcase(
+             os.path.join(module_path, "lldb"))
+ 
