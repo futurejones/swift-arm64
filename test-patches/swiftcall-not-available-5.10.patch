@@ -1,0 +1,19 @@
+diff --git a/include/swift/ABI/Metadata.h b/include/swift/ABI/Metadata.h
+index 99fb5ac17e7..cbe46f6e721 100644
+--- a/include/swift/ABI/Metadata.h
++++ b/include/swift/ABI/Metadata.h
+@@ -17,6 +17,14 @@
+ #ifndef SWIFT_ABI_METADATA_H
+ #define SWIFT_ABI_METADATA_H
+ 
++#if __has_attribute(swiftcall)
++#define SWIFT_CC(swift) __attribute__((swiftcall))
++#define SWIFT_CONTEXT __attribute__((swift_context))
++#else
++#define SWIFT_CC(swift)
++#define SWIFT_CONTEXT
++#endif
++
+ #include <atomic>
+ #include <iterator>
+ #include <string>
