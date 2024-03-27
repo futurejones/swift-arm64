@@ -1,0 +1,13 @@
+diff --git a/src/init.c b/src/init.c
+index d54da41..b5ce1fa 100644
+--- a/src/init.c
++++ b/src/init.c
+@@ -23,6 +23,8 @@
+ 
+ // NOTE: this file must not contain any atomic operations
+ 
++#include <string.h>
++
+ #include "internal.h"
+ #if __linux__
+ #include <linux/limits.h> // for PATH_MAX
