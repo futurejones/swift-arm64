@@ -12,18 +12,15 @@ We are seeing a massive increase in overall performance and a huge reduction in 
 
 ### Debian 11 Bullseye  
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bullseye/)   
-release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-debian-bullseye/)
+release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-debian-bullseye/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-debian-bullseye/)
 
 ### Debian 12 Bookworm 
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/)   
-release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-debian-bookworm/)
-
-### Ubuntu 22.04 Jammy  
-main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-jammy/)    
-release/5.9 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-5.9-ubuntu-jammy/badge/icon)](https://ci.swiftlang.xyz/job/swift-5.9-ubuntu-jammy/)
+release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-debian-bookworm/)
 
 ### Ubuntu 23.04 Lunar  
-main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/) 
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/)  
+release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-lunar/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-lunar/)
 
 
 # Swift-Arm64
