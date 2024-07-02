@@ -18,9 +18,9 @@ release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://
 main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-debian-bookworm/)   
 release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-debian-bookworm/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-debian-bookworm/)
 
-### Ubuntu 23.04 Lunar  
-main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-lunar/)  
-release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-lunar/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-lunar/)
+### Ubuntu 24.04 Noble  
+main branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Build Status](https://ci.swiftlang.xyz/job/swift-main-ubuntu-noble/badge/icon)](https://ci.swiftlang.xyz/job/swift-main-ubuntu-noble/)  
+release/6.0 branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-noble/badge/icon)](https://ci.swiftlang.xyz/job/swift-6.0-ubuntu-noble/)
 
 
 # Swift-Arm64
