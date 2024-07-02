@@ -30,16 +30,16 @@ Swift for Arm64/aarch64 Servers and SBC's - Rock64, RaspberryPi3 and many more
 Install packages are now available for arm64/aarch64 compatible Servers and SBC's for Ubuntu and Debian based OS's in the
 new [Swift Community Apt Repository](https://swiftlang.xyz)
 
-Add repo -
+Add repo
 
 ```bash
-$ curl -s https://archive.swiftlang.xyz/install.sh | sudo bash
+curl -s https://archive.swiftlang.xyz/install.sh | sudo bash
 ``` 
 
 Install Swift
 
 ```bash
-$ sudo apt-get install swiftlang
+sudo apt-get install swiftlang
 ```  
 For more information about the repository please see the [User Guide](https://www.swiftlang.xyz/user-guide)
 
