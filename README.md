@@ -1,3 +1,5 @@
+### *Please Note: This project is no longer active.*
+
 # Swift for Arm64/AArch64 Servers and SBC's
 ## Latest build info from our CI server
 Thanks to the great support from the [Works on Arm](https://www.worksonarm.com/) project we have received an awesome update to our CI Server!  
